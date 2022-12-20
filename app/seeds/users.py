@@ -3,29 +3,68 @@ from app.models import db, User, environment, SCHEMA
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    users = [
+        {
+            "username": 'user1',
+            "email": 'user1@aa.io',
+            "first_name": 'user1_firstname',
+            "last_name": 'user1_lastname',
+            "password": 'password'
+        },
+        {
+            "username": 'user2',
+            "email": 'user2@aa.io',
+            "first_name": 'user2_firstname',
+            "last_name": 'user2_lastname',
+            "password": 'password'
+        },
+        {
+            "username": 'user3',
+            "email": 'user3@aa.io',
+            "first_name": 'user3_firstname',
+            "last_name": 'user3_lastname',
+            "password": 'password'
+        },
+        {
+            "username": 'user4',
+            "email": 'user4@aa.io',
+            "first_name": 'user4_firstname',
+            "last_name": 'user5_lastname',
+            "password": 'password'
+        },
+        {
+            "username": 'user5',
+            "email": 'user5@aa.io',
+            "first_name": 'user5_firstname',
+            "last_name": 'user5_lastname',
+            "password": 'password'
+        },
+        {
+            "username": 'user6',
+            "email": 'user6@aa.io',
+            "first_name": 'user6_firstname',
+            "last_name": 'user6_lastname',
+            "password": 'password'
+        },
+    ]
+
+    for user in users:
+        new_user = User(
+            username = user.username,
+            email = user.email,
+            first_name = user.first_name,
+            last_name = user.last_name,
+            password = user.password)
+        db.session.add(new_user)
+
     db.session.commit()
 
 
-# Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
-# have a built in function to do this. With postgres in production TRUNCATE
-# removes all the data from the table, and RESET IDENTITY resets the auto
-# incrementing primary key, CASCADE deletes any dependent entities.  With
-# sqlite3 in development you need to instead use DELETE to remove all data and
-# it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM users")
-        
+
     db.session.commit()

@@ -1,6 +1,7 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .subscribers import subscribers
 
 
 class User(db.Model, UserMixin):
@@ -12,7 +13,25 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    first_name = db.Column(db.String(255))
+    last_name = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(),server_onupdate=db.func.now())
+
+    videos = db.relationship('Video', back_populates='users', cascade='all, delete')
+    comments = db.relationship('Comment', back_populates='users', cascade='all, delete')
+    likes = db.relatiionship('Like', back_populates='users', cascade='all, delete')
+    subscibers = db.relationship(
+        "User",
+        secondary=subscribers,
+        primaryjoin=(subscribers.c.user_id == id),
+        secondaryjoin=(subscribers.c.subscriber_id == id),
+        backref=db.backref("subscribed", lazy='dynamic'),
+        lazy='dynamic',
+        cascade="all, delete"
+    )
+
 
     @property
     def password(self):
@@ -29,5 +48,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'firstName': self.first_name,
+            'lastName': self.last_name
         }
