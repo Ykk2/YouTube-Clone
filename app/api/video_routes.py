@@ -56,13 +56,13 @@ def get_subscribed_videos(userId):
 
 #EDIT VIDEO BY videoID
 #USER MUST BE OWNER OF VIDEO
-@video_routes.route('<int:videoId>', methods=['PUT'])
+@video_routes.route('/<int:videoId>', methods=['PUT'])
 @login_required
 def edit_video(videoId):
 
     video = Video.query.get(videoId)
     form = VideoForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    # form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         setattr(video, "title", form.data["title"])
@@ -126,3 +126,43 @@ def delete_video(videoId):
 
     except Exception:
         return {"error": "requested video not found"}, 404
+
+
+#INCREASE VIEW COUNT
+
+@video_routes.route('/<int:videoId>/view', methods=['PUT'])
+def increase_view_count(videoId):
+
+    video = Video.query.get(videoId)
+    new_view_count = video.total_views + 1
+    setattr(video, "total_views", new_view_count)
+
+    db.session.commit()
+
+    return video.to_dict()
+
+
+#LIKE A VIDEO
+#MUST BE LOGGED IN
+@video_routes.route('/<int:videoId>/like', methods=['POST'])
+def like_video(videoId):
+
+    new_like = Like(user_id = 1, video_id = videoId)
+
+    db.session.add(new_like)
+    db.session.commit()
+
+    return { "message": "User liked the video"}
+
+#DISLIKE A VIDEO
+#MUST BE LOGGED IN
+
+@video_routes.route('/<int:videoId>/like', methods=['DELETE'])
+def dislike_video(videoId):
+
+    like = Like.query.filter_by(user_id = 1, video_id = videoId).first()
+
+    db.session.delete(like)
+    db.session.commit()
+
+    return { "message": "User dis-liked the video"}
