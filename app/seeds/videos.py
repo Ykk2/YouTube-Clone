@@ -30,12 +30,12 @@ def seed_videos():
 
     for video in videos:
         new_video = Video(
-            owner_id = video.owner_id,
-            video_url = video.video_url,
-            title = video.title,
-            description = video.title,
-            total_views = video.total_views,
-            preview_image = video.preview_image
+            owner_id = video['owner_id'],
+            video_url = video['video_url'],
+            title = video['title'],
+            description = video['title'],
+            total_views = video['total_views'],
+            preview_image = video['preview_image']
         )
         db.session.add(new_video)
 

@@ -1,8 +1,8 @@
 from app.models import db, subscribers, environment, SCHEMA
 
-def seed_comments():
+def seed_subscribers():
 
-    subscribers = [
+    subscribers_list = [
         {
             "user_id": 1,
             "subscriber_id": 2
@@ -29,18 +29,15 @@ def seed_comments():
         }
     ]
 
-    for subscriber in subscribers:
-        new_follow = subscribers.insert().values(
-            user_id = subscriber.user_id,
-            subscriber_id = subscriber.subscriber_id
-        )
-        db.session.add(new_follow)
+    for subscriber in subscribers_list:
+        new_follow = subscribers.insert().values(user_id = subscriber['user_id'], subscriber_id = subscriber['subscriber_id'])
+        db.session.execute(new_follow)
 
     db.session.commit()
 
 
 
-def undo_comments():
+def undo_subscribers():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.subscribers RESTART IDENTITY CASCADE;")
     else:

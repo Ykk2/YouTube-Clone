@@ -6,7 +6,7 @@ def seed_users():
 
     users = [
         {
-            "username": 'user1',
+            'username': 'user1',
             "email": 'user1@aa.io',
             "first_name": 'user1_firstname',
             "last_name": 'user1_lastname',
@@ -51,11 +51,12 @@ def seed_users():
 
     for user in users:
         new_user = User(
-            username = user.username,
-            email = user.email,
-            first_name = user.first_name,
-            last_name = user.last_name,
-            password = user.password)
+            username = user['username'],
+            email = user['email'],
+            first_name = user["first_name"],
+            last_name = user["last_name"],
+            password = user['password']
+        )
         db.session.add(new_user)
 
     db.session.commit()

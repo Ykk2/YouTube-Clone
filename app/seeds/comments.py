@@ -37,9 +37,9 @@ def seed_comments():
 
     for comment in comments:
         new_comment = Comment(
-            user_id = comment.user_id,
-            video_id = comment.video_id,
-            comment = comment.comment
+            user_id = comment['user_id'],
+            video_id = comment['video_id'],
+            comment = comment['comment']
         )
         db.session.add(new_comment)
 

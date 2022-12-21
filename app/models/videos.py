@@ -7,18 +7,18 @@ class Video(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeginKey(add_prefix_for_prod('users.id')), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     video_url = db.Column(db.String(1000), nullable=False)
-    title = db.Column(db.String(255), nullable=False, unique=True)
+    title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
-    total_views = db.Column(db.Integer, server_default=0)
+    total_views = db.Column(db.Integer, default=0)
     preview_image = db.Column(db.String(1000), nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(),server_onupdate=db.func.now())
 
-    users = db.relationship('User', back_populates='videos')
+    users = db.relationship("User", back_populates="videos")
     comments = db.relationship('Comment', back_populates='videos')
-    likes = db.relationship('Video', back_populates='videos', cascade='all, delete')
+    likes = db.relationship('Like', back_populates='videos', cascade='all, delete')
 
 
     def to_dict(self):

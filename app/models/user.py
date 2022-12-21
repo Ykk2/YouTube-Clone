@@ -19,9 +19,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(),server_onupdate=db.func.now())
 
-    videos = db.relationship('Video', back_populates='users', cascade='all, delete')
+    videos = db.relationship("Video", back_populates="users", cascade='all, delete')
     comments = db.relationship('Comment', back_populates='users', cascade='all, delete')
-    likes = db.relatiionship('Like', back_populates='users', cascade='all, delete')
+    likes = db.relationship('Like', back_populates='users', cascade='all, delete')
+
     subscibers = db.relationship(
         "User",
         secondary=subscribers,
