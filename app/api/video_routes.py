@@ -22,6 +22,7 @@ def get_video_by_id(videoId):
 
     try:
         video = Video.query.get(videoId).to_dict()
+        print("********************", video)
         return {"video": video}
     except Exception:
         return {"error": "requested video not found"}, 404
@@ -45,7 +46,6 @@ def get_subscribed_videos(userId):
     res = []
     user = User.query.get(userId)
     subscribed_list = user.subscribed.all()
-
     for users in subscribed_list:
         videos_query = Video.query.filter_by(owner_id = users.id).all()
         for video in videos_query:

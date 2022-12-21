@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', back_populates='users', cascade='all, delete')
     likes = db.relationship('Like', back_populates='users', cascade='all, delete')
 
-    subscibers = db.relationship(
+    subscribers = db.relationship(
         "User",
         secondary=subscribers,
         primaryjoin=(subscribers.c.user_id == id),
@@ -51,5 +51,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'firstName': self.first_name,
-            'lastName': self.last_name
+            'lastName': self.last_name,
+            'subscribers': len(self.subscribers.all())
         }

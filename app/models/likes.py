@@ -10,8 +10,8 @@ class Like(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     video_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('videos.id')), nullable=False)
 
-    users = db.relationship('User', back_populates='likes', cascade='all, delete')
-    videos = db.relationship('Video', back_populates='likes', cascade='all, delete')
+    users = db.relationship('User', back_populates='likes')
+    videos = db.relationship('Video', back_populates='likes')
 
     def to_dict(self):
         return {
