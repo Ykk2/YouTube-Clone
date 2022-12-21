@@ -29,6 +29,8 @@ def upgrade():
         sa.Column('first_name', sa.String(length=255)),
         sa.Column('last_name', sa.String(length=255)),
         sa.Column('hashed_password', sa.String(length=255), nullable=False),
+        sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)')),
+        sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)')),
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('email'),
         sa.UniqueConstraint('username')

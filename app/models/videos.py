@@ -32,4 +32,5 @@ class Video(db.Model):
             'previewImage': self.preview_image,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
+            'user': self.users.to_dict()
         }
