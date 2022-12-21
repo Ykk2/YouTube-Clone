@@ -12,7 +12,7 @@ class Video(db.Model):
     title = db.Column(db.String(255), nullable=False, unique=True)
     description = db.Column(db.String(255))
     total_views = db.Column(db.Integer, server_default=0)
-    preview_image = db.Column(db.String(255), nullable=False)
+    preview_image = db.Column(db.String(1000), nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(),server_onupdate=db.func.now())
 

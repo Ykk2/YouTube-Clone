@@ -4,8 +4,32 @@ def seed_likes():
 
     likes = [
         {
-            user_id:
-            video_id:
+            "user_id": 1,
+            "video_id": 1
+        },
+        {
+            "user_id": 2,
+            "video_id": 1
+        },
+        {
+            "user_id": 3,
+            "video_id": 2
+        },
+        {
+            "user_id": 4,
+            "video_id": 2
+        },
+        {
+            "user_id": 5,
+            "video_id": 2
+        },
+        {
+            "user_id": 6,
+            "video_id": 3
+        },
+        {
+            "user_id": 2,
+            "video_id": 3
         }
     ]
 

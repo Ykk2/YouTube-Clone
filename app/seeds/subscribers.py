@@ -4,8 +4,28 @@ def seed_comments():
 
     subscribers = [
         {
-            user_id:
-            subscriber_id:
+            "user_id": 1,
+            "subscriber_id": 2
+        },
+        {
+            "user_id": 1,
+            "subscriber_id": 3
+        },
+        {
+            "user_id": 2,
+            "subscriber_id": 4
+        },
+        {
+            "user_id": 3,
+            "subscriber_id": 5
+        },
+        {
+            "user_id": 4,
+            "subscriber_id": 6
+        },
+        {
+            "user_id": 5,
+            "subscriber_id": 3
         }
     ]
 
