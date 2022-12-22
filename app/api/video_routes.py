@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, request
 from flask_login import login_required, current_user
 from ..models import db, Video, Comment, subscribers, Like, User
 from ..forms import VideoForm
-from .aws import (allowed_file, get_unique_filename, upload_file_to_s3)
+from .aws import (allowed_file, get_unique_filename, upload_file_to_s3, delete_file_from_s3)
 
 video_routes = Blueprint("videos", __name__)
 
@@ -20,12 +20,11 @@ def get_all_videos():
 @video_routes.route("/<int:videoId>")
 def get_video_by_id(videoId):
 
-    try:
+    # try:
         video = Video.query.get(videoId).to_dict()
-        print("********************", video)
         return {"video": video}
-    except Exception:
-        return {"error": "requested video not found"}, 404
+    # except Exception:
+    #     return {"error": "requested video not found"}, 404
 
 
 #GET ALL VIDEOS OF SPECIFIC USER
@@ -115,11 +114,13 @@ def new_video():
 #DELETE VIDEO BY videoID
 #USER MUST BE OWNER OF VIDEO
 @video_routes.route("/<int:videoId>", methods=['DELETE'])
-@login_required
+# @login_required
 def delete_video(videoId):
 
     try:
         video = Video.query.get(videoId)
+        video_url = video.video_url
+        delete_file_from_s3(video_url)
         db.session.delete(video)
         db.session.commit()
         return {"message": "Succesfully Deleted"}, 202

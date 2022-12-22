@@ -1,4 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from flask_login import current_user
+
+
 
 class Video(db.Model):
     __tablename__ = 'videos'
@@ -17,11 +20,13 @@ class Video(db.Model):
     updated_at = db.Column(db.DateTime, server_default=db.func.now(),server_onupdate=db.func.now())
 
     users = db.relationship("User", back_populates="videos")
-    comments = db.relationship('Comment', back_populates='videos')
+    comments = db.relationship('Comment', back_populates='videos', cascade='all, delete')
     likes = db.relationship('Like', back_populates='videos', cascade='all, delete')
 
 
+
     def to_dict(self):
+
         return {
             'id': self.id,
             'ownerId': self.owner_id,
@@ -33,5 +38,6 @@ class Video(db.Model):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
             'user': self.users.to_dict(),
-            'likes': len(self.likes)
+            'likes': len([likes.liked for likes in self.likes if likes.liked == True]),
+            'userLiked': [likes.liked for likes in self.likes if likes.user_id == current_user.id][0]
         }

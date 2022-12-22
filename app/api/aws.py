@@ -24,6 +24,10 @@ def get_unique_filename(filename):
     unique_filename = uuid.uuid4().hex
     return f"{unique_filename}.{ext}"
 
+def get_key_from_url(url):
+    key = url.rsplit(".com/", 1)[1]
+    key = key.replace("+", " ")
+    return key
 
 def upload_file_to_s3(file, acl="public-read"):
     try:
@@ -41,3 +45,12 @@ def upload_file_to_s3(file, acl="public-read"):
         return {"errors": str(e)}
 
     return {"url": f"{S3_LOCATION}{file.filename}"}
+
+
+
+def delete_file_from_s3(url):
+    try:
+        s3.delete_object(Bucket='ykk-youtubeclone', Key=get_key_from_url(url))
+        return {"message": "Succesfully deleted"}
+    except Exception as e:
+        return {"errors": str(e)}
