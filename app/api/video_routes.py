@@ -152,8 +152,17 @@ def increase_view_count(videoId):
 @video_routes.route('/<int:videoId>/like', methods=['POST'])
 def like_video(videoId):
 
-    new_like = Like(user_id = 1, video_id = videoId)
+    like = Like.query.filter_by(user_id = 1, video_id = videoId).first()
 
+    if (like.liked == False):
+        setattr(like, 'liked', True)
+        return { "message": "User liked the video"}
+
+    elif (like.liked == True):
+        return {"message": "User already liked the video"}
+
+
+    new_like = Like(user_id = current_user.id, video_id = videoId, liked = True)
     db.session.add(new_like)
     db.session.commit()
 
@@ -162,12 +171,20 @@ def like_video(videoId):
 #DISLIKE A VIDEO
 #MUST BE LOGGED IN
 
-@video_routes.route('/<int:videoId>/like', methods=['DELETE'])
+@video_routes.route('/<int:videoId>/like', methods=['POST'])
 def dislike_video(videoId):
 
-    like = Like.query.filter_by(user_id = 1, video_id = videoId).first()
+    like = Like.query.filter_by(user_id = current_user.id, video_id = videoId).first()
 
-    db.session.delete(like)
+    if (like.liked == True):
+        setattr(like, 'liked', False)
+        return { "message": "User disliked the video"}
+
+    elif (like.liked == False):
+        return {"message": "User already dis-liked the video"}
+
+    new_like = Like(user_id = 1, video_id = videoId, liked = False)
+    db.session.add(new_like)
     db.session.commit()
 
     return { "message": "User dis-liked the video"}
