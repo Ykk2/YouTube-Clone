@@ -39,5 +39,20 @@ class Video(db.Model):
             'updatedAt': self.updated_at,
             'user': self.users.to_dict(),
             'likes': len([likes.liked for likes in self.likes if likes.liked == True]),
+        }
+
+    def to_dict_after_login(self):
+        return {
+            'id': self.id,
+            'ownerId': self.owner_id,
+            'videoUrl': self.video_url,
+            'title': self.title,
+            'description': self.description,
+            'totalViews': self.total_views,
+            'previewImage': self.preview_image,
+            'createdAt': self.created_at,
+            'updatedAt': self.updated_at,
+            'user': self.users.to_dict(),
+            'likes': len([likes.liked for likes in self.likes if likes.liked == True]),
             'userLiked': [likes.liked for likes in self.likes if likes.user_id == current_user.id][0]
         }

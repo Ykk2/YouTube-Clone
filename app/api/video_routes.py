@@ -20,11 +20,15 @@ def get_all_videos():
 @video_routes.route("/<int:videoId>")
 def get_video_by_id(videoId):
 
-    # try:
-        video = Video.query.get(videoId).to_dict()
-        return {"video": video}
-    # except Exception:
-    #     return {"error": "requested video not found"}, 404
+    try:
+        video = Video.query.get(videoId)
+        if (current_user.id):
+            return {"video": video.to_dict_after_login()}
+        else:
+            return {"video": video.to_dict()}
+
+    except Exception:
+        return {"error": "requested video not found"}, 404
 
 
 #GET ALL VIDEOS OF SPECIFIC USER
