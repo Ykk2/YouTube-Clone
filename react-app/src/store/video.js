@@ -52,6 +52,26 @@ export const getVideos = () => async (dispatch) => {
   }
 }
 
+export const getUserVideos = (userId) => async (dispatch) => {
+
+  const response = await fetch(`/api/videos/${userId}`);
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(loadVideos(data))
+    return null
+
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
 export const getVideo = (videoId) => async (dispatch) => {
   const response = await fetch(`/api/videos/${videoId}`);
 
