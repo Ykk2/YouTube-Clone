@@ -1,0 +1,51 @@
+.main-page {
+    position: fixed;
+    left: 10%;
+    top: 10%;
+    width: 90%;
+    height: 100vh;
+    border: 1px solid cyan;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.video-card {
+    display:flex;
+    flex-direction: column;
+    width: 15vw;
+    height: 15vw;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.video-card > video {
+    object-fit: cover;
+    height: 70%;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.video-card-info {
+    height: 30%;
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+}
+
+#video-card-info-right :nth-child(1) {
+    border: 1px solid red;
+    font-size: 12px;
+    margin: 0
+}
+
+#video-card-info-right :nth-child(2) {
+    border: 1px solid blue;
+    font-size: 12px;
+    margin: 0
+}
+
+#video-card-info-right > span {
+    font-size: 12px;
+}

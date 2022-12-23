@@ -1,0 +1,23 @@
+.NavBar {
+    position: fixed;
+    max-height: 10%;
+    min-height: 10%;
+    min-width: 100vw;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 0;
+    left: 0
+}
+
+.NavBar-left {
+    border: 1px solid blue;
+    min-width: 10%;
+    height: 100%;
+}
+.NavBar-right {
+    height: 100%;
+    min-width: 10%;
+    border: 1px solid green
+}

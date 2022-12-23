@@ -32,7 +32,6 @@ const removeVideo = (videoId) => ({
 });
 
 
-
 export const getVideos = () => async (dispatch) => {
 
   const response = await fetch('/api/videos');
