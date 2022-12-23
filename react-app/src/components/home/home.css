@@ -4,6 +4,8 @@
     top: 10%;
     width: 90%;
     height: 100vh;
+    padding-left: 3%;
+    padding-right: 3%;
     border: 1px solid cyan;
     display: flex;
     align-items: flex-start;
@@ -14,10 +16,13 @@
 .video-card {
     display:flex;
     flex-direction: column;
-    width: 15vw;
-    height: 15vw;
+    min-width: 250px;
+    min-height: 200px;
+    width: 18vw;
+    height: 14vw;
     margin-top: 2%;
-    margin-left: 2%;
+    margin-left: 20px;
+    flex-wrap: wrap;
 }
 
 .video-card > video {
