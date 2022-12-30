@@ -5,6 +5,8 @@ const LOAD_VIDEO = 'video/LOAD_VIDEO'
 const CREATE_VIDEO = 'video/CREATE_VIDEO'
 const EDIT_VIDEO = 'video/EDIT_VIDEO'
 const DELETE_VIDEO = 'video/DELETE_VIDEO'
+const UPVOTE_VIDEO = 'video/UPVOTE_VIDEO'
+const DOWNVOTE_VIDEO = 'video/DOWNVOTE_VIDEO'
 
 const loadVideos = (videos) => ({
   type: LOAD_VIDEOS,
@@ -30,6 +32,58 @@ const removeVideo = (videoId) => ({
   type: DELETE_VIDEO,
   data: videoId
 });
+
+const upvote = (videoId) => ({
+  type: UPVOTE_VIDEO,
+  data: videoId
+})
+
+const downvote = (videoId) => ({
+  type: DOWNVOTE_VIDEO,
+  data: videoId
+})
+
+export const upvoteVideo = (videoId) => async (dispatch) => {
+  const response = await fetch(`/api/videos/${videoId}/like`, {
+    methods: "POST"
+  })
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(upvote(videoId))
+    return null
+
+  } else if (response.status < 500) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return data.errors;
+    }
+
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const downvoteVideo = (videoId) => async (dispatch) => {
+  const response = await fetch(`/api/videos/${videoId}/dislike`, {
+    methods: "POST"
+  })
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(downvote(videoId))
+    return null
+
+  } else if (response.status < 500) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return data.errors;
+    }
+
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
 
 
 export const getVideos = () => async (dispatch) => {
@@ -164,28 +218,39 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
       return newState
     }
     case LOAD_VIDEO: {
-      const newState = { videos: {...state.videos}, video: {} }
+      const newState = { videos: { ...state.videos }, video: {} }
       newState.video = action.data.video
       return newState
     }
 
     case CREATE_VIDEO: {
-      const newState = { videos: {...state.videos}, video: {...state.video}}
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
       newState.videos[action.data.video.id] = action.data.video
       return newState
     }
 
     case EDIT_VIDEO: {
-      const newState = { videos: {...state.videos}, video: {...state.video}}
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
       newState.videos[action.data.video.id] = action.data.video
       newState.video = action.data.video
     }
-    /* falls through */
     case DELETE_VIDEO: {
-      const newState = {videos: {...state.videos}, video: {...state.video}}
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
       delete newState.videos[action.data.videoId]
       return newState
     }
+
+    case UPVOTE_VIDEO: {
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
+      newState.video.likes++
+      return newState
+    }
+
+    /* falls through */
+    case DOWNVOTE_VIDEO:
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
+      newState.video.likes--
+      return newState
 
     default:
       return state;

@@ -22,6 +22,9 @@ def get_video_by_id(videoId):
 
     try:
         video = Video.query.get(videoId)
+        new_view_count = video.total_views + 1
+        setattr(video, "total_views", new_view_count)
+        db.session.commit()
         if (current_user.id):
             return {"video": video.to_dict_after_login()}
         else:
@@ -135,16 +138,16 @@ def delete_video(videoId):
 
 #INCREASE VIEW COUNT
 
-@video_routes.route('/<int:videoId>/view', methods=['PUT'])
-def increase_view_count(videoId):
+# @video_routes.route('/<int:videoId>/view', methods=['PUT'])
+# def increase_view_count(videoId):
 
-    video = Video.query.get(videoId)
-    new_view_count = video.total_views + 1
-    setattr(video, "total_views", new_view_count)
+#     video = Video.query.get(videoId)
+#     new_view_count = video.total_views + 1
+#     setattr(video, "total_views", new_view_count)
 
-    db.session.commit()
+#     db.session.commit()
 
-    return video.to_dict()
+#     return video.to_dict()
 
 
 #LIKE A VIDEO
@@ -171,7 +174,7 @@ def like_video(videoId):
 #DISLIKE A VIDEO
 #MUST BE LOGGED IN
 
-@video_routes.route('/<int:videoId>/like', methods=['POST'])
+@video_routes.route('/<int:videoId>/dislike', methods=['POST'])
 def dislike_video(videoId):
 
     like = Like.query.filter_by(user_id = current_user.id, video_id = videoId).first()
