@@ -1,14 +1,14 @@
 
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getVideos } from "../../store/video"
+import { getVideos } from "../../store/videos"
 import './home.css'
 
 
 const HomePage = () => {
 
     const dispatch = useDispatch()
-    const videos = useSelector(state => Object.values(state.video.videos))
+    const videos = useSelector(state => Object.values(state.videos.videos))
 
     useEffect(() => {
         dispatch(getVideos())
@@ -20,7 +20,7 @@ const HomePage = () => {
             {videos.map(video => (
                 <div className="video-card" key={video.id}>
                     <video
-                        onMouseOver={event => setTimeout(event.target.play(), 2000)}
+                        onMouseOver={event => event.target.play()}
                         onMouseOut={event => event.target.pause()}
                         >
                         <source src={video.videoUrl} type="video/mp4" />

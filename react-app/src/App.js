@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+// import ProtectedRoute from './components/auth/ProtectedRoute';
 import HomePage from './components/home/home';
 import NavBar from './components/Navigation/NavBar'
 import SideBar from './components/Sidebar/SideBar';
+import VideoDetails from './components/Video/video';
 import { authenticate } from './store/session';
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
         </ProtectedRoute> */}
         <Route path='/' exact={true} >
           <HomePage />
+        </Route>
+        <Route path='/:videoId'>
+          <VideoDetails />
         </Route>
       </Switch>
     </BrowserRouter>

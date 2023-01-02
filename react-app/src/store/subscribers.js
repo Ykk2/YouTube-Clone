@@ -64,7 +64,7 @@ export const unsubscribe = (userId) => async (dispatch) => {
     })
 
     if (response.ok) {
-      const data = await response.json()
+
       dispatch(removeSubscriber(userId))
       return null
 

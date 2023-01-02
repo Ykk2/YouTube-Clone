@@ -5,7 +5,7 @@ from ..models import db, Video, Comment, subscribers, Like, User
 
 subscriber_routes = Blueprint("subscribers", __name__)
 
-@subscriber_routes.route("/<int:userId")
+@subscriber_routes.route("/<int:userId>")
 @login_required
 def subscribed_list():
     user = User.query.get(current_user.id)
@@ -13,7 +13,7 @@ def subscribed_list():
     return {'subscribed' :[channel.to_dict() for channel in list]}
 
 
-@subscriber_routes.route("/<int:userId", methods=['POST'])
+@subscriber_routes.route("/<int:userId>", methods=['POST'])
 @login_required
 def subscribe(userId):
 
@@ -30,7 +30,7 @@ def subscribe(userId):
     return {"message": "Succesfully subscribed",
             "user": user.to_dict()}
 
-@subscriber_routes.route("/<int:userId", methods=['DELETE'])
+@subscriber_routes.route("/<int:userId>", methods=['DELETE'])
 @login_required
 def unsubscribe(userId):
 

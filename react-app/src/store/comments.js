@@ -127,13 +127,13 @@ export default function reducer(state = { comments: {} }, action) {
             return newState
         }
 
-        case EDIT_VIDEO: {
+        case EDIT_COMMENT: {
             const newState = { comments: { ...state.comments } }
             newState.comments[action.data.comment.id] = action.data.comment
             return newState
         }
         /* falls through */
-        case DELETE_VIDEO: {
+        case DELETE_COMMENT: {
             const newState = { comments: { ...state.comments } }
             delete newState.comments[action.data.commentId]
             return newState

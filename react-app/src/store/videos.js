@@ -48,7 +48,7 @@ export const upvoteVideo = (videoId) => async (dispatch) => {
     methods: "POST"
   })
   if (response.ok) {
-    const data = await response.json()
+
     dispatch(upvote(videoId))
     return null
 
@@ -69,7 +69,7 @@ export const downvoteVideo = (videoId) => async (dispatch) => {
     methods: "POST"
   })
   if (response.ok) {
-    const data = await response.json()
+
     dispatch(downvote(videoId))
     return null
 
@@ -213,7 +213,7 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
 
   switch (action.type) {
     case LOAD_VIDEOS: {
-      const newState = { videos: {}, video: {} }
+      const newState = { videos: {}, video: {...state.video} }
       newState.videos = normalize(action.data.videos)
       return newState
     }
@@ -234,6 +234,7 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
       newState.videos[action.data.video.id] = action.data.video
       newState.video = action.data.video
     }
+    /* falls through */
     case DELETE_VIDEO: {
       const newState = { videos: { ...state.videos }, video: { ...state.video } }
       delete newState.videos[action.data.videoId]
@@ -246,7 +247,6 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
       return newState
     }
 
-    /* falls through */
     case DOWNVOTE_VIDEO:
       const newState = { videos: { ...state.videos }, video: { ...state.video } }
       newState.video.likes--

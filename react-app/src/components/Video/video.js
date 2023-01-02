@@ -1,30 +1,33 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
+import { useParams } from "react-router-dom";
 import { getComments } from "../../store/comments"
-import { getVideo } from "../../store/video"
+import { getVideo, getVideos } from "../../store/videos"
+import './videoDetails.css'
 
 
-const VideoDetails = ({videoId}) => {
+const VideoDetails = () => {
 
     const dispatch = useDispatch()
 
-    const videos = useSelector(state => state.video.videos)
-    const video = useSelector(state => state.video.video)
-
-
+    const { videoId } = useParams()
+    const videos = useSelector(state => state.videos.videos)
+    const video = useSelector(state => state.videos.video)
     const comments = useSelector(state => state.comments)
 
     useEffect(() => {
-        dispatch(getComments())
-        dispatch(getVideo)
+        dispatch(getComments(videoId))
+        dispatch(getVideos())
+        dispatch(getVideo(videoId))
     }, [dispatch])
+
 
 
     return(
         <>
             <div className="main-content">
                 <div className="main-video">
-
+                    <video  src={video?.videoUrl} width="320" height="240" controls autoPlay />
                 </div>
                 <div className="video-info">
                     <div id="video-title">
