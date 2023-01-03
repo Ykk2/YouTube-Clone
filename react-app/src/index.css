@@ -18,6 +18,12 @@
     url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
 }
 
+@font-face {
+    font-family:"Roboto-Thin";
+    src: local("bold"),
+    url("./assets/fonts/Roboto-Thin.ttf") format("truetype");
+}
+
 * {
     font-family: Roboto-Regular;
     background-color: black;

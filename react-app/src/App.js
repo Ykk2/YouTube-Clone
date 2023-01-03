@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 // import ProtectedRoute from './components/auth/ProtectedRoute';
 import HomePage from './components/home/home';
 import NavBar from './components/Navigation/NavBar'
-// import SideBar from './components/Sidebar/SideBar';
+import LoginForm from './components/auth/LoginForm';
+import SignUpForm from './components/auth/SignUpForm';
 import VideoDetails from './components/Video/video';
 import { authenticate } from './store/session';
 
@@ -25,7 +26,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
         {/* <Route path='/login' exact={true}>
           <LoginForm />
@@ -44,6 +44,12 @@ function App() {
         </Route>
         <Route path='/videos/:videoId'>
           <VideoDetails />
+        </Route>
+        <Route path='/login' exact={true}>
+          <LoginForm />
+        </Route>
+        <Route>
+          <SignUpForm path='/signup' exact={true}/>
         </Route>
       </Switch>
     </BrowserRouter>

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getVideos } from "../../store/videos"
 import SideBar from '../Sidebar/SideBar';
+import NavBar from "../Navigation/NavBar";
 import { NavLink } from "react-router-dom";
 import './home.css'
 
@@ -19,6 +20,7 @@ const HomePage = () => {
 
     return (
         <div>
+            <NavBar />
             <SideBar />
             <div className="main-page">
                 {videos.map(video => (

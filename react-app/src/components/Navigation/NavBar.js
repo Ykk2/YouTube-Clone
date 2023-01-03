@@ -8,11 +8,7 @@ const NavBar = () => {
     return (
         <div className="NavBar">
             <div className="NavBar-left">Left</div>
-            <div className="NavBar-right">
-                <NavLink>
-
-                </NavLink>
-            </div>
+            <div className="NavBar-right">right</div>
         </div>
     )
 }

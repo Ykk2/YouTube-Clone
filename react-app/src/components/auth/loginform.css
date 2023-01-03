@@ -1,0 +1,89 @@
+.login-form {
+    border: 1.5px solid gray;
+    border-radius: 5px;
+    width: 400px;
+    height: auto;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.login-form-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50px;
+    height: 17%;
+    justify-content: space-between;
+
+}
+
+.email-field-login,
+.password-field-login{
+    width : 80%;
+    height: 40px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.email-field-login > label {
+    position: absolute;
+    font-size: 12px;
+    top: -8px;
+    left: 10px;
+    border-left: 6px solid black;
+    border-right: 6px solid black;
+}
+
+.password-field-login > label {
+    position: absolute;
+    font-size: 12px;
+    top: -8px;
+    left: 10px;
+    border-left: 6px solid black;
+    border-right: 6px solid black;
+}
+
+.email-field-login > input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.password-field-login > input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
+}
+
+
+.login-form div:nth-child(6) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    position: absolute;
+    bottom: 80px;
+}
+
+.login-form div:nth-child(6) > button {
+    padding: 0;
+    border: 0;
+}
