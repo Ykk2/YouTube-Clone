@@ -1,4 +1,89 @@
-.main-video {
-    border: 1px solid red;
-    margin-left: 300px;
+.video-details {
+    position: absolute;
+    top: 15%;
+    display: flex;
+    flex-direction: row;
+    width: 88vw;
+    justify-content: space-between;
+    left: 5%;
+
+}
+
+.main-content {
+    width: 76%;
+}
+
+.video-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#channel-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#channel-info-left {
+    display: flex;
+    flex-direction: row;
+}
+
+#channel-info-left-left {
+    display: flex;
+    flex-direction: row;
+}
+
+.video-comments {
+    display: flex;
+    flex-direction: column;
+}
+
+.recommended-videos {
+    display: flex;
+    flex-direction: column;
+    width: 22.5%;
+}
+
+.main-video > video {
+    width: 100%;
+    height: auto;
+}
+
+.recommended-videos-card {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    height: 94px;
+}
+
+.recommended-videos-info {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+    height: 100%;
+}
+
+.recommended-videos-info div:nth-child(1) {
+    padding-bottom: 10px;
+}
+
+.recommended-videos-info div:nth-child(2) {
+    margin-bottom: -10px;
+}
+
+
+.recommended-videos-card > video {
+    width: 168px;
+    height: 94px;
+    border-radius: 6px;
+    background-color: black;;
+}
+
+.comment-box {
+    display: flex;
+    flex-direction: row;
 }

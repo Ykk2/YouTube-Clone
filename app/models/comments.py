@@ -24,4 +24,5 @@ class Comment(db.Model):
             'comment': self.comment,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
+            "user": self.users.to_dict()
         }

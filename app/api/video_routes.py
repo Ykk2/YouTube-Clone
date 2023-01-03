@@ -25,7 +25,7 @@ def get_video_by_id(videoId):
         new_view_count = video.total_views + 1
         setattr(video, "total_views", new_view_count)
         db.session.commit()
-        if (current_user.id):
+        if (current_user.is_authenticated):
             return {"video": video.to_dict_after_login()}
         else:
             return {"video": video.to_dict()}
