@@ -92,6 +92,7 @@ const VideoDetails = () => {
                                 </div>
                             </NavLink>
                     }
+                    return null
                 }
                 )}
             </div>
