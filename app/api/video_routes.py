@@ -73,7 +73,7 @@ def edit_video(videoId):
     if form.validate_on_submit():
         setattr(video, "title", form.data["title"])
         setattr(video, "description", form.data["title"])
-        setattr(video, "preview_image", form.data["preview_image"])
+        # setattr(video, "preview_image", form.data["preview_image"])
 
     db.session.commit()
 

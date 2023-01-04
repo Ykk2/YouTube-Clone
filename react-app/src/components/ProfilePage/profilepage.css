@@ -14,13 +14,17 @@
     height: 100%;
 }
 
+.my-video-card-container {
+    width: 250px;
+    height: 200px;
+    position: relative
+}
+
 .my-video-card {
     display: flex;
     flex-direction: column;
-    min-width: 250px;
-    min-height: 200px;
-    width: 18vw;
-    height: 14vw;
+    width: 220px;
+    height: 180px;
     margin-top: 2%;
     margin-left: 20px;
 }
@@ -35,6 +39,8 @@
 .my-video-card-info {
     display: flex;
     flex-direction: column;
+    height: 30%;
+    width: 100%;
 }
 
 .my-video-card-info {
@@ -48,6 +54,29 @@
     width: 85%;
 }
 
-.my-video-card-info-right {
+.my-video-card-top {
+    height: 80%
+}
+
+.my-video-card-bottom {
     width: 15%;
+    height: 20%;
+    display:flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+    background-color: transparent
+}
+
+
+.my-video-card-info-left > p, span {
+    font-size: 12px;
+    margin: 0;
+    background-color: transparent;
+}
+
+.my-video-card-bottom > button {
+    background-color: transparent;
+    border: none
 }

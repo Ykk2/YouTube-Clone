@@ -6,4 +6,4 @@ class VideoForm(FlaskForm):
     # video_url = StringField("video_url",[DataRequired()])
     title = StringField("title",[DataRequired()])
     description = StringField("description", [DataRequired()])
-    preview_image = StringField("preview_image", [DataRequired()])
+    preview_image = StringField("preview_image")

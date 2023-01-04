@@ -21,6 +21,7 @@ const NavBar = () => {
     const handleLogOutClick = (e) => {
         e.preventDefault()
         dispatch(logout())
+        history.push('/')
     }
 
     const handleProfileClick = (e) => {

@@ -7,6 +7,7 @@ import NavBar from './components/Navigation/NavBar'
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import VideoDetails from './components/Video/video';
+import { Modal, ModalProvider } from './context/Modal';
 import { authenticate } from './store/session';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 
@@ -26,38 +27,40 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        {/* <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute> */}
-        <Route path='/' exact={true} >
-          <HomePage />
-        </Route>
-        <Route path='/videos/:videoId'>
-          <VideoDetails />
-        </Route>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/user/:username'>
-          <ProfilePage />
-        </Route>
-        <Route>
-          <SignUpForm path='/signup' exact={true}/>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <ModalProvider >
+      <BrowserRouter>
+        <NavBar />
+        <Switch>
+          {/* <Route path='/login' exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path='/sign-up' exact={true}>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path='/users' exact={true} >
+            <UsersList/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId' exact={true} >
+            <User />
+          </ProtectedRoute> */}
+          <Route path='/' exact={true} >
+            <HomePage />
+          </Route>
+          <Route path='/videos/:videoId'>
+            <VideoDetails />
+          </Route>
+          <Route path='/login' exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path='/user/:username'>
+            <ProfilePage />
+          </Route>
+          <Route>
+            <SignUpForm path='/signup' exact={true}/>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </ModalProvider>
   );
 }
 

@@ -1,0 +1,76 @@
+
+.video-card-editting > video {
+    height: 200px;
+    width: 320px;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+
+.video-form-editting {
+    height: 520px;
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.video-card-editting {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+
+textarea {
+    resize: none;
+    width: 280px;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding-top: 20px;
+}
+
+.edit-video-form div:nth-child(1) {
+    width: 100%;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+
+.edit-video-form div:nth-child(2) {
+    width: 100%;
+    position: relative
+}
+
+.edit-video-form div:nth-child(1) > label {
+    position: absolute;
+    font-size: 10px;
+    top: -6px;
+    left: 17px;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+}
+
+.edit-video-form div:nth-child(2) > label {
+    position: absolute;
+    font-size: 10px;
+    top: -6px;
+    left: 17px;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+}
+
+.video-card-editting div:nth-child(2) {
+    border: 1px solid red;
+    width: 89%;
+    font-size: 12px;
+}
+
+.video-card-editting div:nth-child(3) {
+    font-size: 12px;
+    width: 89%;
+}
