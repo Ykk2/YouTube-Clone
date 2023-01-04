@@ -54,5 +54,5 @@ class Video(db.Model):
             'updatedAt': self.updated_at,
             'user': self.users.to_dict(),
             'likes': len([likes.liked for likes in self.likes if likes.liked == True]),
-            'userLiked': [likes.liked for likes in self.likes if likes.user_id == current_user.id][0]
+            'userLiked': [likes.liked for likes in self.likes if likes.user_id == current_user.id]
         }

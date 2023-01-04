@@ -8,6 +8,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import VideoDetails from './components/Video/video';
 import { authenticate } from './store/session';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <NavBar />
       <Switch>
         {/* <Route path='/login' exact={true}>
           <LoginForm />
@@ -47,6 +49,9 @@ function App() {
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
+        </Route>
+        <Route path='/user/:username'>
+          <ProfilePage />
         </Route>
         <Route>
           <SignUpForm path='/signup' exact={true}/>

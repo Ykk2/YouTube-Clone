@@ -1,0 +1,53 @@
+
+.profile-page-top {
+    padding-top: 60px;
+    padding-left: 120px;
+}
+
+.profile-page-options {
+    border-bottom: 1px solid gray;
+    padding-left: 120px
+}
+
+.my-video-container {
+    padding-left: 120px;
+    height: 100%;
+}
+
+.my-video-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    min-height: 200px;
+    width: 18vw;
+    height: 14vw;
+    margin-top: 2%;
+    margin-left: 20px;
+}
+
+.my-video-card > video {
+    object-fit: cover;
+    height: 70%;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.my-video-card-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-video-card-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.my-video-card-info-left {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+}
+
+.my-video-card-info-right {
+    width: 15%;
+}

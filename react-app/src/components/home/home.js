@@ -20,7 +20,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <NavBar />
+
             <SideBar />
             <div className="main-page">
                 {videos.map(video => (

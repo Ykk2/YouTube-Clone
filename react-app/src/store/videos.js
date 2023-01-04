@@ -108,10 +108,10 @@ export const getVideos = () => async (dispatch) => {
 
 export const getUserVideos = (userId) => async (dispatch) => {
 
-  const response = await fetch(`/api/videos/${userId}`);
-
+  const response = await fetch(`/api/videos/user/${userId}`);
   if (response.ok) {
     const data = await response.json();
+
     dispatch(loadVideos(data))
     return null
 

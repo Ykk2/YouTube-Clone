@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { NavLink, useHistory } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
+import { logout } from "../../store/session"
 import './navigation.css'
 
 const NavBar = () => {
@@ -8,11 +9,24 @@ const NavBar = () => {
     const user = useSelector(state => state.session.user)
     const [showMenu, setShowMenu] = useState(false)
 
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const handleShowMenuClick = (e) => {
         e.preventDefault()
         if (showMenu === false) setShowMenu(true)
         if (showMenu === true) setShowMenu(false)
+    }
+
+    const handleLogOutClick = (e) => {
+        e.preventDefault()
+        dispatch(logout())
+    }
+
+    const handleProfileClick = (e) => {
+        e.preventDefault()
+        history.push(`/user/${user.username}`)
+        setShowMenu(false)
     }
 
     return (
@@ -29,17 +43,25 @@ const NavBar = () => {
                     <span>Sign in</span>
                 </NavLink>
                 }
-                { showMenu ?
+                { showMenu && user ?
                 <div className="navbar-dropdown-menu">
                     <div>
                         <div>circle</div>
-                        <div >
+                        <div className="dropdown-userinfo">
                             <div>{user.firstName} {user.lastName}</div>
                             <div>{`@${user.username}`}</div>
                         </div>
                     </div>
-                    <div className="dropdown-divider" >Your Channel</div>
-                    <div>Sign out</div>
+                    <div className="dropdown-bottom">
+                        <div className="dropdown-your-channel">
+                            <i class="fa-solid fa-tv" />
+                            <div onClick={handleProfileClick}>Your Channel</div>
+                        </div>
+                        <div className="dropdown-sign-out">
+                            <i class="fa-solid fa-arrow-right-from-bracket"/>
+                            <div onClick={handleLogOutClick}>Sign out</div>
+                        </div>
+                    </div>
                 </div>
                 :
                 null
