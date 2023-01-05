@@ -68,15 +68,15 @@ def edit_video(videoId):
 
     video = Video.query.get(videoId)
     form = VideoForm()
-    # form['csrf_token'].data = request.cookies['csrf_token']
-
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print("before editting********************************************************", form.data)
     if form.validate_on_submit():
         setattr(video, "title", form.data["title"])
-        setattr(video, "description", form.data["title"])
+        setattr(video, "description", form.data["description"])
         # setattr(video, "preview_image", form.data["preview_image"])
 
     db.session.commit()
-
+    print("after editting", video.to_dict())
     return video.to_dict()
 
 #CREATE VIDEO

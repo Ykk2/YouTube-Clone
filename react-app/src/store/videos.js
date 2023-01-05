@@ -168,13 +168,15 @@ export const postVideo = (video) => async (dispatch) => {
 }
 
 export const putVideo = (video) => async (dispatch) => {
-  const response = await fetch(`/api/videos${video.id}`, {
-    method: "PUT",
-    body: video
+  const response = await fetch(`/api/videos/${video.id}`, {
+    method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(video)
   });
 
   if (response.ok) {
     const data = await response.json()
+    console.log(data)
     dispatch(editVideo(data))
     return null
 
@@ -199,6 +201,7 @@ export const deleteVideo = (videoId) => async (dispatch) => {
 
   } else if (response.status < 500) {
     const data = await response.json()
+
     if (data.errors) {
       return data.errors
     }
@@ -231,8 +234,8 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
 
     case EDIT_VIDEO: {
       const newState = { videos: { ...state.videos }, video: { ...state.video } }
-      newState.videos[action.data.video.id] = action.data.video
-      newState.video = action.data.video
+      console.log("in reducer", action.data)
+      newState.videos[action.data.id] = action.data
     }
     /* falls through */
     case DELETE_VIDEO: {

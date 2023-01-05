@@ -44,3 +44,11 @@ a {
     color: rgb(225, 225, 225);
     text-decoration: none;
 }
+
+input:focus {
+    outline: none
+}
+
+textarea:focus {
+    outline: none
+}
