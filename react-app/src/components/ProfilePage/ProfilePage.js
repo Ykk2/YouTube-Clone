@@ -1,16 +1,19 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Modal } from "../../context/Modal"
-import SideBar from "../Sidebar/SideBar"
 import { getUserVideos } from "../../store/videos"
+import SideBar from "../Sidebar/SideBar"
+import NavBar from "../Navigation/NavBar"
 import EditVideo from "../EditVideo"
 import DeleteVideo from "../DeleteVideo"
 import "./profilepage.css"
 
+
 const ProfilePage = () => {
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const user = useSelector(state => state.session.user)
     const videos = useSelector(state => Object.values(state.videos.videos))
@@ -35,9 +38,14 @@ const ProfilePage = () => {
 
     }
 
+    const handleVideoUploadClick = (e) => {
+        e.preventDefault()
+        history.push(`/user/${user.username}/create`)
+    }
 
     return (
         <div className="profile-page-main">
+            <NavBar />
             <SideBar />
             <div className="profile-page-top">
                 <div>icon goes here</div>
@@ -45,6 +53,7 @@ const ProfilePage = () => {
                     <div>{user.firstName} {user.lastName}</div>
                     <div>{`@${user.username}`}</div>
                     <div>{user.subscribers} subscribers</div>
+                    <button onClick={handleVideoUploadClick}>Upload Videos</button>
                 </div>
             </div>
             <div className="profile-page-options">

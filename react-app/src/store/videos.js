@@ -192,7 +192,7 @@ export const putVideo = (video) => async (dispatch) => {
 }
 
 export const deleteVideo = (videoId) => async (dispatch) => {
-  const response = await fetch(`/api/videos${videoId}`, {
+  const response = await fetch(`/api/videos/${videoId}`, {
     method: "DELETE"
   });
 
@@ -234,7 +234,6 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
 
     case EDIT_VIDEO: {
       const newState = { videos: { ...state.videos }, video: { ...state.video } }
-      console.log("in reducer", action.data)
       newState.videos[action.data.id] = action.data
     }
     /* falls through */

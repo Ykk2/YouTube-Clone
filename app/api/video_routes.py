@@ -69,7 +69,6 @@ def edit_video(videoId):
     video = Video.query.get(videoId)
     form = VideoForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("before editting********************************************************", form.data)
     if form.validate_on_submit():
         setattr(video, "title", form.data["title"])
         setattr(video, "description", form.data["description"])

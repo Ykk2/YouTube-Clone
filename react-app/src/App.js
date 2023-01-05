@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import ProtectedRoute from './components/auth/ProtectedRoute';
+import { ModalProvider } from './context/Modal';
+import { authenticate } from './store/session';
 import HomePage from './components/home/home';
 import NavBar from './components/Navigation/NavBar'
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import VideoDetails from './components/Video/video';
-import { Modal, ModalProvider } from './context/Modal';
-import { authenticate } from './store/session';
 import ProfilePage from './components/ProfilePage/ProfilePage';
+import CreateVideo from './components/CreateVideo';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,7 +30,6 @@ function App() {
   return (
     <ModalProvider >
       <BrowserRouter>
-        <NavBar />
         <Switch>
           {/* <Route path='/login' exact={true}>
             <LoginForm />
@@ -51,6 +51,9 @@ function App() {
           </Route>
           <Route path='/login' exact={true}>
             <LoginForm />
+          </Route>
+          <Route path='/user/:username/create' exact={true}>
+            <CreateVideo />
           </Route>
           <Route path='/user/:username'>
             <ProfilePage />

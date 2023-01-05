@@ -1,16 +1,20 @@
 
+import { useDispatch, useSelector } from "react-redux"
 import { deleteVideo } from "../../store/videos"
-import { useDispatch } from "react-redux"
-
+import { getUserVideos } from "../../store/videos"
 
 
 const DeleteVideo = ({setDeleting, id}) => {
 
     const dispatch = useDispatch()
 
+    const user = useSelector(state => state.session.user)
+
     const deleteVideoConfirm = (e) => {
         e.preventDefault()
         dispatch(deleteVideo(id))
+        .then(getUserVideos(user.id))
+        .then(setDeleting(false))
     }
 
     const cancelDelete = (e) => {
