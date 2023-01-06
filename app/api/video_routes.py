@@ -39,7 +39,7 @@ def get_video_by_id(videoId):
 @login_required
 def get_user_videos(userId):
 
-    videos_query = Video.query.filter_by(id = userId).all()
+    videos_query = Video.query.filter_by(owner_id = userId).all()
     videos = [video.to_dict() for video in videos_query]
     return {"videos": videos}
 
@@ -83,8 +83,9 @@ def edit_video(videoId):
 @video_routes.route('/new', methods=["POST"])
 # @login_required
 def new_video():
-    form = VideoForm()
-    # form['csrf_token'].data = request.cookies['csrf_token']
+    # form = VideoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    # print("********************** FORM.DATA", form.data)
     if "video" not in request.files:
         return {"errors": "video is required"}, 400
 
@@ -101,21 +102,28 @@ def new_video():
         return upload, 400
 
     video_url = upload["url"]
-    title = form.data.title
-    description = form.data.description
-    preview_image = form.data.preview_image
+    title = request.form['title']
+    description = request.form['description']
+    # preview_image = form.data.preview_image
     owner_id = current_user.id
 
+    # new_video = Video(owner_id = owner_id,
+    #                   video_url = video_url,
+    #                   title = title,
+    #                   description = description,
+    #                   preview_image = preview_image)
+
     new_video = Video(owner_id = owner_id,
-                      video_url = video_url,
-                      title = title,
-                      description = description,
-                      preview_image = preview_image)
+                    video_url = video_url,
+                    title = title,
+                    description = description,
+                    )
+
 
     db.session.add(new_video)
     db.session.commit()
 
-    return {"videos" : new_video.to_dict()}
+    return new_video.to_dict()
 
 #DELETE VIDEO BY videoID
 #USER MUST BE OWNER OF VIDEO

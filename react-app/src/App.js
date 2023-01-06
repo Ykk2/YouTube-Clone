@@ -10,7 +10,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import VideoDetails from './components/Video/video';
 import ProfilePage from './components/ProfilePage/ProfilePage';
-import CreateVideo from './components/CreateVideo';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,9 +51,6 @@ function App() {
           </Route>
           <Route path='/login' exact={true}>
             <LoginForm />
-          </Route>
-          <Route path='/user/:username/create' exact={true}>
-            <CreateVideo />
           </Route>
           <Route path='/user/:username'>
             <ProfilePage />

@@ -48,7 +48,7 @@ def upgrade():
         sa.Column('title', sa.String(length=255), nullable=False),
         sa.Column('description', sa.String(length=255)),
         sa.Column('total_views', sa.Integer(), default=0, nullable=False),
-        sa.Column('preview_image', sa.String(length=1000), nullable=False),
+        sa.Column('preview_image', sa.String(length=1000)),
         sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)')),
         sa.Column('updated_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)')),
         sa.PrimaryKeyConstraint('id'),

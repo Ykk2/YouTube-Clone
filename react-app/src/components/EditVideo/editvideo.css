@@ -70,9 +70,9 @@ textarea {
 .video-card-editting div:nth-child(2) {
     width: 85%;
     font-size: 11px;
-    white-space: pre-wrap; /* CSS 2.1 */
-    white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
-    word-wrap: break-word; /* IE */
+    white-space: pre-wrap;
+    white-space: pre-line;
+    word-wrap: break-word;
     word-break: break-all;
     padding-bottom: 10px;
 }
@@ -80,11 +80,10 @@ textarea {
 .video-card-editting div:nth-child(3) {
     font-size: 11px;
     width: 85%;
-    white-space: pre-wrap;
     height: 45px;
-    white-space: pre-wrap; /* CSS 2.1 */
-    white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
-    word-wrap: break-word; /* IE */
+    white-space: pre-wrap;
+    white-space: pre-line;
+    word-wrap: break-word;
     word-break: break-all;
 }
 

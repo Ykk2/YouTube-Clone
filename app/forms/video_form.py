@@ -4,6 +4,6 @@ from wtforms.validators import DataRequired
 
 class VideoForm(FlaskForm):
     # video_url = StringField("video_url",[DataRequired()])
-    title = StringField("title",[DataRequired()])
-    description = StringField("description", [DataRequired()])
-    preview_image = StringField("preview_image")
+    title = StringField("title",validators=[DataRequired()])
+    description = StringField("description", validators=[DataRequired()])
+    # preview_image = StringField("preview_image")

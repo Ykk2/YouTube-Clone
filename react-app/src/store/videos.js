@@ -169,14 +169,13 @@ export const postVideo = (video) => async (dispatch) => {
 
 export const putVideo = (video) => async (dispatch) => {
   const response = await fetch(`/api/videos/${video.id}`, {
-    method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(video)
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(video)
   });
 
   if (response.ok) {
     const data = await response.json()
-    console.log(data)
     dispatch(editVideo(data))
     return null
 
@@ -228,7 +227,7 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
 
     case CREATE_VIDEO: {
       const newState = { videos: { ...state.videos }, video: { ...state.video } }
-      newState.videos[action.data.video.id] = action.data.video
+      newState.videos[action.data.id] = action.data
       return newState
     }
 

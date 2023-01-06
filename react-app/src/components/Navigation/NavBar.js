@@ -30,9 +30,16 @@ const NavBar = () => {
         setShowMenu(false)
     }
 
+    const handleHomeClick = (e) => {
+        e.preventDefault()
+        history.push('/')
+    }
+
     return (
         <div className="NavBar">
-            <div className="NavBar-left">Left</div>
+            <div className="NavBar-left">
+                <div onClick={handleHomeClick}>home</div>
+            </div>
             <div className="NavBar-right">
                 { user ?
                 <div>

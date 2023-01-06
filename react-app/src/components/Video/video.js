@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams, NavLink } from "react-router-dom";
-import { getComments } from "../../store/comments"
+import { getComments, postComment, deleteComment, putComment } from "../../store/comments"
 import { getVideo, getVideos } from "../../store/videos"
 import NavBar from "../Navigation/NavBar";
 import './videoDetails.css'
@@ -16,7 +16,9 @@ const VideoDetails = () => {
     const video = useSelector(state => state.videos.video)
     const comments = useSelector(state => Object.values(state.comments.comments))
 
-
+    const [focused, setFocused] = useState(false)
+    const [comment, setComment] = useState("")
+    const [commentSubmit, setCommentSubmit] = useState("")
 
     useEffect(() => {
         dispatch(getComments(videoId))
@@ -24,7 +26,34 @@ const VideoDetails = () => {
         dispatch(getVideo(videoId))
     }, [dispatch, videoId])
 
+    useEffect(() => {
+        if (comment.length <= 0) setCommentSubmit('comment-not-ready')
+        else setCommentSubmit('comment-ready')
+    }, [comment])
 
+
+    const updateComment = (e) => {
+        e.preventDefault()
+        setComment(e.target.value)
+        e.target.style.height = "10px"
+        e.target.style.height = `${e.target.scrollHeight}px`
+
+    }
+
+    const handleCommentSubmit = (e) => {
+        e.preventDefault()
+
+        dispatch(postComment({comment}, videoId))
+        setFocused(false)
+    }
+
+    const showOptions = () => {
+        setFocused(true)
+    }
+
+    const hideOptions = () => {
+        setFocused(false)
+    }
 
     return (
         <>
@@ -65,11 +94,27 @@ const VideoDetails = () => {
                     </div>
                     <div className="comment-box">
                         <div>
-                            user icon goes here
+                            circle
                         </div>
-                        <input>
-
-                        </input>
+                        <div>
+                            <textarea
+                                type='text'
+                                name='comment-box'
+                                onChange={updateComment}
+                                value={comment}
+                                onFocus={showOptions}
+                                placeholder="Add a comment..."
+                                maxLength='1000'
+                                />
+                            { focused ?
+                                <span>
+                                    <button onClick={hideOptions}>Cancel</button>
+                                    <button className={`${commentSubmit}`} onClick={handleCommentSubmit}>Comment</button>
+                                </span>
+                                :
+                                null
+                            }
+                        </div>
                     </div>
                     <div className="video-comments">
                         {comments.map(comment => (

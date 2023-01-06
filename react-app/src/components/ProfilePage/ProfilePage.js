@@ -8,6 +8,7 @@ import NavBar from "../Navigation/NavBar"
 import EditVideo from "../EditVideo"
 import DeleteVideo from "../DeleteVideo"
 import "./profilepage.css"
+import CreateVideo from "../CreateVideo"
 
 
 const ProfilePage = () => {
@@ -20,7 +21,8 @@ const ProfilePage = () => {
 
     const [editting, setEditting] = useState(false)
     const [deleting, setDeleting] = useState(false)
-
+    const [creating, setCreating] = useState(false)
+    const [videoFocus, setVideoFocus] = useState('')
 
     useEffect(() => {
         dispatch(getUserVideos(user.id))
@@ -28,19 +30,21 @@ const ProfilePage = () => {
 
     const handleVideoEditClick = (e) => {
         e.preventDefault()
+        setVideoFocus(e.target.value)
         setEditting(true)
 
     }
 
     const handleVideoDeleteClick = (e) => {
         e.preventDefault()
+        setVideoFocus(e.target.value)
         setDeleting(true)
 
     }
 
     const handleVideoUploadClick = (e) => {
         e.preventDefault()
-        history.push(`/user/${user.username}/create`)
+        setCreating(true)
     }
 
     return (
@@ -80,24 +84,31 @@ const ProfilePage = () => {
                             </NavLink>
                         </div>
                         <div className="my-video-card-bottom">
-                            <button onClick={handleVideoEditClick}>Edit</button>
-                            <button onClick={handleVideoDeleteClick}>Delete</button>
+                            <button value={video.id} onClick={handleVideoEditClick}>Edit</button>
+                            <button value={video.id} onClick={handleVideoDeleteClick}>Delete</button>
                         </div>
                         {
-                            editting &&
+                            editting && videoFocus == video.id &&
                             <Modal onClose={() => setEditting(false)}>
                                 <EditVideo setEditting={setEditting} video={video}/>
                             </Modal>
                         }
                         {
-                            deleting &&
+                            deleting && videoFocus == video.id &&
                             <Modal onClose={() => setDeleting(false)}>
                                 <DeleteVideo setDeleting={setDeleting} id={video.id}/>
                             </Modal>
                         }
+
                     </div>
                     ))}
             </div>
+            {
+                creating &&
+                <Modal onClose={() => setCreating(false)}>
+                    <CreateVideo setCreating={setCreating}/>
+                </Modal>
+            }
         </div>
     )
 }

@@ -3,4 +3,4 @@ from wtforms.fields import (StringField)
 from wtforms.validators import DataRequired
 
 class CommentForm(FlaskForm):
-    comment = StringField("title",[DataRequired()])
+    comment = StringField("comment", validators=[DataRequired()])

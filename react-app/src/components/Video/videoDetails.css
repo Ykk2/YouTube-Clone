@@ -11,6 +11,7 @@
 
 .main-content {
     width: 76%;
+    border: 1px solid red;
 }
 
 .video-info {
@@ -39,6 +40,7 @@
 .video-comments {
     display: flex;
     flex-direction: column;
+
 }
 
 .recommended-videos {
@@ -86,4 +88,88 @@
 .comment-box {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.comment-box div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    text-align: center;
+
+    /* vertical-align: top; */
+}
+
+
+.comment-box div:nth-child(2) > textarea {
+    width: 98%;
+    height: 12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    outline: none;
+    resize: none;
+    font-size: 10px;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid gray;
+    border-radius: 0;
+    padding-bottom: 3px;
+}
+
+.comment-box div:nth-child(2) > textarea:focus {
+    border-bottom: 1px solid white;
+}
+
+.comment-box div:nth-child(2) > textarea::-webkit-scrollbar{
+    width: 0px;
+}
+
+.comment-box div:nth-child(2) > span {
+    align-self: flex-end;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 20px;
+
+}
+
+.comment-box div:nth-child(2) > span > button {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.comment-box div:nth-child(2) > span button:nth-child(1) {
+    width: 55px;
+    border: 1px solid transparent;
+    padding: 6px;
+    border-radius: 45px;
+    text-align: center;
+}
+
+.comment-not-ready {
+    width: 70px;
+    border: 1px solid rgb(67, 67, 67);
+    background-color: rgb(67, 67, 67);
+    color: rgb(154, 154, 154);
+    padding: 6px;
+    border-radius: 45px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.comment-box div:nth-child(2) > span button:nth-child(1):hover {
+    border: 1px solid rgb(67, 67, 67);
+    background-color: rgb(67, 67, 67);
+}
+
+.comment-ready {
+    width: 70px;
+    border: 1px solid rgb(62,166,255);
+    background-color: rgb(62,166,255);
+    color: black;
+    padding: 6px;
+    border-radius: 45px;
+    text-align: center;
+    margin-left: 10px;
 }

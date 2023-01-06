@@ -46,9 +46,9 @@ a {
 }
 
 input:focus {
-    outline: none
+    outline: 1px rgb(62, 166, 255) solid;
 }
 
 textarea:focus {
-    outline: none
+    outline: 1px rgb(62, 166, 255) solid;
 }

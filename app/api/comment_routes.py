@@ -21,15 +21,18 @@ def get_all_comment(videoId):
 def create_comment(videoId):
 
     form = CommentForm()
-
-    if (form.validate_onsubmit()):
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if (form.validate_on_submit()):
         new_comment = Comment(user_id = current_user.id,
                               video_id = videoId,
                               comment = form.data["comment"])
         db.session.add(new_comment)
         db.session.commit()
+        return new_comment.to_dict()
 
-    return new_comment.to_dict()
+    return {"error": "Comment did not validate"}
+
+
 
 
 

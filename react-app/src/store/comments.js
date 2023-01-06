@@ -48,13 +48,15 @@ export const getComments = (videoId) => async (dispatch) => {
 
 
 
-export const postComment = (comment) => async (dispatch) => {
-    const response = await fetch(`/api/comments/${comment.videoId}`, {
+export const postComment = (comment, videoId) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${videoId}`, {
         method: "POST",
-        body: comment
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
     });
 
     if (response.ok) {
+
         const data = await response.json()
         dispatch(createComment(data))
         return null
@@ -123,7 +125,7 @@ export default function reducer(state = { comments: {} }, action) {
 
         case CREATE_COMMENT: {
             const newState = { comments: { ...state.comments } }
-            newState.comments[action.data.comment.id] = action.data.comment
+            newState.comments[action.data.id] = action.data
             return newState
         }
 

@@ -77,7 +77,7 @@ const LoginForm = () => {
         Don't have an account? Log in as a <a onClick={demoSignIn}>Demo User</a>
       </div>
       <div>
-        <button onClick={signUp}>Create Account</button>
+        <span onClick={signUp}>Create Account</span>
         <button type='submit'>Sign in</button>
       </div>
     </form>
