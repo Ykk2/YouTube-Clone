@@ -21,7 +21,7 @@ const VideoDetails = () => {
     const [focused, setFocused] = useState(false)
     const [comment, setComment] = useState("")
     const [commentSubmit, setCommentSubmit] = useState("")
-
+    const [commentError, setCommentError] = useState(false)
 
     useEffect(() => {
         dispatch(getComments(videoId))
@@ -29,10 +29,16 @@ const VideoDetails = () => {
         dispatch(getVideo(videoId))
     }, [dispatch, videoId])
 
+
     useEffect(() => {
         if (comment.length <= 0) setCommentSubmit('comment-not-ready')
         else setCommentSubmit('comment-ready')
     }, [comment])
+
+
+    useEffect(() => {
+        if (comment.length < 0) setCommentError("")
+    })
 
 
     const updateComment = (e) => {

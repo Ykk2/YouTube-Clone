@@ -15,6 +15,7 @@ const CommentCard = ({ comment }) => {
     const [edittedComment, setEdittedComment] = useState(comment.comment)
     const [commentSubmit, setCommentSubmit] = useState("")
 
+
     useEffect(() => {
         if (edittedComment?.length <= 0) setCommentSubmit('comment-not-ready')
         else setCommentSubmit('comment-ready')
