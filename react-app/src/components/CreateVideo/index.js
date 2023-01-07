@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { postVideo } from '../../store/videos'
 import { useDispatch } from 'react-redux'
 import './createvideo.css'
 
 const CreateVideo = ({setCreating}) => {
 
-    const history = useHistory()
+    // const history = useHistory()
     const dispatch = useDispatch()
 
     const [video, setVideo] = useState(null)

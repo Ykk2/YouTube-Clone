@@ -1,4 +1,4 @@
-import { NavLink, useHistory } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Modal } from "../../context/Modal"
@@ -14,7 +14,7 @@ import CreateVideo from "../CreateVideo"
 const ProfilePage = () => {
 
     const dispatch = useDispatch()
-    const history = useHistory()
+
 
     const user = useSelector(state => state.session.user)
     const videos = useSelector(state => Object.values(state.videos.videos))
@@ -88,13 +88,13 @@ const ProfilePage = () => {
                             <button value={video.id} onClick={handleVideoDeleteClick}>Delete</button>
                         </div>
                         {
-                            editting && videoFocus == video.id &&
+                            editting && +videoFocus === +video.id &&
                             <Modal onClose={() => setEditting(false)}>
                                 <EditVideo setEditting={setEditting} video={video}/>
                             </Modal>
                         }
                         {
-                            deleting && videoFocus == video.id &&
+                            deleting && +videoFocus === +video.id &&
                             <Modal onClose={() => setDeleting(false)}>
                                 <DeleteVideo setDeleting={setDeleting} id={video.id}/>
                             </Modal>

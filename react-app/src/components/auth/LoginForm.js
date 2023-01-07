@@ -28,7 +28,7 @@ const LoginForm = () => {
 
   const demoSignIn = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login("user1@aa.io", "password"))
+    dispatch(login("user1@aa.io", "password"))
   }
 
   const updateEmail = (e) => {
@@ -74,7 +74,7 @@ const LoginForm = () => {
           />
       </div>
       <div>
-        Don't have an account? Log in as a <a onClick={demoSignIn}>Demo User</a>
+        Don't have an account? Log in as a <div onClick={demoSignIn}>Demo User</div>
       </div>
       <div>
         <span onClick={signUp}>Create Account</span>

@@ -73,9 +73,11 @@ export const postComment = (comment, videoId) => async (dispatch) => {
 }
 
 export const putComment = (comment) => async (dispatch) => {
-    const response = await fetch(`/api/comments/${comment.videoId}`, {
+
+    const response = await fetch(`/api/comments/${comment.id}`, {
         method: "PUT",
-        body: comment
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
     });
 
     if (response.ok) {
@@ -131,13 +133,13 @@ export default function reducer(state = { comments: {} }, action) {
 
         case EDIT_COMMENT: {
             const newState = { comments: { ...state.comments } }
-            newState.comments[action.data.comment.id] = action.data.comment
+            newState.comments[action.data.id] = action.data
             return newState
         }
         /* falls through */
         case DELETE_COMMENT: {
             const newState = { comments: { ...state.comments } }
-            delete newState.comments[action.data.commentId]
+            delete newState.comments[action.data]
             return newState
         }
 

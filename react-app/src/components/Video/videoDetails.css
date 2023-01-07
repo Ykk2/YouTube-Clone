@@ -12,6 +12,7 @@
 .main-content {
     width: 76%;
     border: 1px solid red;
+    margin-bottom: 100px;
 }
 
 .video-info {
@@ -40,7 +41,7 @@
 .video-comments {
     display: flex;
     flex-direction: column;
-
+    padding-top: 30px;
 }
 
 .recommended-videos {
@@ -95,7 +96,7 @@
 .comment-box div:nth-child(2) {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
     height: auto;
     text-align: center;
 
@@ -110,8 +111,9 @@
     word-wrap: break-word;
     outline: none;
     resize: none;
-    font-size: 10px;
+    font-size: 12px;
     padding: 0;
+    margin-left: 23px;
     border: none;
     border-bottom: 1px solid gray;
     border-radius: 0;
@@ -129,9 +131,6 @@
 .comment-box div:nth-child(2) > span {
     align-self: flex-end;
     padding-top: 10px;
-    padding-right: 12px;
-    padding-bottom: 20px;
-
 }
 
 .comment-box div:nth-child(2) > span > button {

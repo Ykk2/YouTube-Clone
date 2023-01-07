@@ -1,8 +1,7 @@
 from flask import Flask, Blueprint, request
 from flask_login import login_required, current_user
-from ..models import db, Video, Comment, subscribers, Like
+from ..models import db, Comment
 from ..forms import CommentForm
-
 
 comment_routes = Blueprint("comments", __name__)
 
@@ -10,7 +9,7 @@ comment_routes = Blueprint("comments", __name__)
 #GET ALL COMMENTS FOR A VIDEO
 @comment_routes.route("/<int:videoId>")
 def get_all_comment(videoId):
-    comments_query = Comment.query.filter_by(video_id = videoId).all()
+    comments_query = Comment.query.filter(Comment.video_id == videoId).all()
     comments = [comment.to_dict() for comment in comments_query]
     return { "comments" : comments}
 
@@ -42,9 +41,11 @@ def create_comment(videoId):
 def edit_comment(commentId):
 
     form = CommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
     comment = Comment.query.get(commentId)
 
-    if form.validate_onsubmit():
+    if form.validate_on_submit():
         setattr(comment, "comment", form.data["comment"])
 
     db.session.commit()

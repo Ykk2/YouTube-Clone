@@ -43,11 +43,11 @@ const NavBar = () => {
             <div className="NavBar-right">
                 { user ?
                 <div>
-                    <i onClick={handleShowMenuClick} class="fa-regular fa-circle" />
+                    <i onClick={handleShowMenuClick} className="fa-regular fa-circle" />
                 </div>
                 :
                 <NavLink to="/login">
-                    <i class="fa-regular fa-circle-user"></i>
+                    <i className="fa-regular fa-circle-user"></i>
                     <span>Sign in</span>
                 </NavLink>
                 }
@@ -62,11 +62,11 @@ const NavBar = () => {
                     </div>
                     <div className="dropdown-bottom">
                         <div className="dropdown-your-channel">
-                            <i class="fa-solid fa-tv" />
+                            <i className="fa-solid fa-tv" />
                             <div onClick={handleProfileClick}>Your Channel</div>
                         </div>
                         <div className="dropdown-sign-out">
-                            <i class="fa-solid fa-arrow-right-from-bracket"/>
+                            <i className="fa-solid fa-arrow-right-from-bracket"/>
                             <div onClick={handleLogOutClick}>Sign out</div>
                         </div>
                     </div>

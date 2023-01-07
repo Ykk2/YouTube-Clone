@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { useParams, NavLink } from "react-router-dom";
-import { getComments, postComment, deleteComment, putComment } from "../../store/comments"
+import { getComments, postComment } from "../../store/comments"
 import { getVideo, getVideos } from "../../store/videos"
 import NavBar from "../Navigation/NavBar";
+import CommentCard from "./CommentCard";
 import './videoDetails.css'
 
 
@@ -16,9 +17,11 @@ const VideoDetails = () => {
     const video = useSelector(state => state.videos.video)
     const comments = useSelector(state => Object.values(state.comments.comments))
 
+
     const [focused, setFocused] = useState(false)
     const [comment, setComment] = useState("")
     const [commentSubmit, setCommentSubmit] = useState("")
+
 
     useEffect(() => {
         dispatch(getComments(videoId))
@@ -45,15 +48,19 @@ const VideoDetails = () => {
 
         dispatch(postComment({comment}, videoId))
         setFocused(false)
+        setComment("")
     }
 
     const showOptions = () => {
         setFocused(true)
+
     }
 
     const hideOptions = () => {
         setFocused(false)
+        setComment("")
     }
+
 
     return (
         <>
@@ -117,8 +124,8 @@ const VideoDetails = () => {
                         </div>
                     </div>
                     <div className="video-comments">
-                        {comments.map(comment => (
-                            <span>{comment.comment}</span>
+                        {comments.reverse().map(comment => (
+                            <CommentCard key={comment.id} comment={comment}/>
                         ))}
                     </div>
                 </div>
@@ -126,8 +133,8 @@ const VideoDetails = () => {
                 <div className="recommended-videos">
                     {videos.map(video => {
                         if (video.id !== +videoId) {
-                            return <NavLink to={`/videos/${video.id}`}>
-                                <div className="recommended-videos-card">
+                            return <NavLink key={video.id} to={`/videos/${video.id}`}>
+                                <div  className="recommended-videos-card">
                                     <video src={video?.videoUrl}
                                         muted
                                         onMouseOver={event => event.target.play()}

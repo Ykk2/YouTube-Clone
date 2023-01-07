@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { ModalProvider } from './context/Modal';
 import { authenticate } from './store/session';
 import HomePage from './components/home/home';
-import NavBar from './components/Navigation/NavBar'
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import VideoDetails from './components/Video/video';
