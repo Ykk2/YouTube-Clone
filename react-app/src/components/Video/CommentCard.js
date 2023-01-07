@@ -27,7 +27,7 @@ const CommentCard = ({ comment }) => {
         else return false
     }
 
-    const handleCancelCommentEditClick =  (e) => {
+    const handleCancelCommentEditClick = (e) => {
         e.preventDefault()
         setShowCommentEditBox(false)
     }

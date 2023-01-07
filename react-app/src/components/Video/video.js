@@ -23,6 +23,7 @@ const VideoDetails = () => {
     const [commentSubmit, setCommentSubmit] = useState("")
     const [commentError, setCommentError] = useState(false)
 
+
     useEffect(() => {
         dispatch(getComments(videoId))
         dispatch(getVideos())
@@ -31,14 +32,10 @@ const VideoDetails = () => {
 
 
     useEffect(() => {
-        if (comment.length <= 0) setCommentSubmit('comment-not-ready')
+        if (comment.length <= 0 || !comment.trim()) setCommentSubmit('comment-not-ready')
         else setCommentSubmit('comment-ready')
     }, [comment])
 
-
-    useEffect(() => {
-        if (comment.length < 0) setCommentError("")
-    })
 
 
     const updateComment = (e) => {
@@ -65,6 +62,8 @@ const VideoDetails = () => {
     const hideOptions = () => {
         setFocused(false)
         setComment("")
+        const textArea = document.getElementById("textarea")
+        textArea.style.height = "10px"
     }
 
 
@@ -111,6 +110,7 @@ const VideoDetails = () => {
                         </div>
                         <div>
                             <textarea
+                                id="textarea"
                                 type='text'
                                 name='comment-box'
                                 onChange={updateComment}
@@ -118,7 +118,9 @@ const VideoDetails = () => {
                                 onFocus={showOptions}
                                 placeholder="Add a comment..."
                                 maxLength='1000'
-                                />
+                                >
+                            </textarea>
+                                <div className="comment-length-counter">{`${comment.length}/1000`}</div>
                             { focused ?
                                 <span>
                                     <button onClick={hideOptions}>Cancel</button>
