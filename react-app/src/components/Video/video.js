@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import { useParams, NavLink } from "react-router-dom";
 import { getComments, postComment } from "../../store/comments"
 import { getVideo, getVideos, upvoteVideo, downvoteVideo } from "../../store/videos"
-import { getSubscribedList } from "../../store/subscribers";
+import { getSubscribedList, subscribe, unsubscribe } from "../../store/subscribers";
+import { dateConverter, viewsConverter } from "../../store/helper";
 import NavBar from "../Navigation/NavBar";
 import CommentCard from "./CommentCard";
 import './videoDetails.css'
@@ -26,7 +27,7 @@ const VideoDetails = () => {
     const [liked, setLiked] = useState("")
     const [disliked, setDisliked] = useState("")
     const [subscribed, setSubscribed] = useState()
-    const [ showUnsubscribe, setShowUnsubscribe] = useState(false)
+    const [showUnsubscribe, setShowUnsubscribe] = useState(false)
 
     // useEffect for initial data load and state change
     useEffect(() => {
@@ -57,7 +58,7 @@ const VideoDetails = () => {
 
     // useEffect to disable/enable comment button
     useEffect(() => {
-        if (comment.length <= 0 || !comment.trim()) setCommentSubmit('comment-not-ready')
+        if (comment?.length <= 0 || !comment?.trim()) setCommentSubmit('comment-not-ready')
         else setCommentSubmit('comment-ready')
     }, [comment])
 
@@ -66,6 +67,7 @@ const VideoDetails = () => {
     useEffect(() => {
         const found = subscribedList.find(user => user.id === video.ownerId)
         if (found) setSubscribed(true)
+        else setSubscribed(false)
     }, [subscribedList])
 
 
@@ -85,11 +87,13 @@ const VideoDetails = () => {
 
     const handleSubscribeClick = (e) => {
         e.preventDefault()
+        dispatch(subscribe(video.ownerId))
 
     }
 
     const handleUnsubscribeClick = (e) => {
         e.preventDefault()
+        dispatch(unsubscribe(video.ownerId))
     }
 
     const handleShowUnsubscribe = (e) => {
@@ -141,7 +145,7 @@ const VideoDetails = () => {
                                     </div>
                                     <div>
                                         <div>{video?.user?.username}</div>
-                                        <div>{video?.user?.subscribers} {+video?.user?.subscribers <= 1 ? "subscriber" : "subscriber"}</div>
+                                        <div>{video?.user?.subscribers} {+video?.user?.subscribers <= 1 ? "subscriber" : "subscribers"}</div>
                                     </div>
                                 </div>
                                 {
@@ -154,8 +158,7 @@ const VideoDetails = () => {
                                         {
                                         showUnsubscribe ?
                                         <div className="notification-menu">
-
-                                            <div className="unsubscribe">
+                                            <div onClick={handleUnsubscribeClick} className="unsubscribe">
                                                 <i class="fa-solid fa-user-minus fa-flip-horizontal"></i>
                                                 <span>unsubscribe</span>
                                             </div>
@@ -165,7 +168,7 @@ const VideoDetails = () => {
                                         }
                                     </button>
                                     :
-                                    <button className="subscribe-button">
+                                    <button onClick={handleSubscribeClick} className="subscribe-button">
                                         Subscribe
                                     </button>
                                 }
@@ -181,11 +184,15 @@ const VideoDetails = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="video-description">
+                        <span>{viewsConverter(video.totalViews)} {dateConverter(video.createdAt)}</span>
+                        <div>{video?.description}</div>
+                    </div>
                     <div className="comment-total">
-                        {`${comments.length} Comments`}
+                        {`${comments?.length} Comments`}
                     </div>
                     <div className="comment-box">
-                        <div>
+                        <div id="profile-pic-comment">
                             circle
                         </div>
                         <div>
@@ -200,7 +207,7 @@ const VideoDetails = () => {
                                 maxLength='1000'
                                 >
                             </textarea>
-                                <div className="comment-length-counter">{`${comment.length}/1000`}</div>
+                                <div className="comment-length-counter">{`${comment?.length}/1000`}</div>
                             { focused ?
                                 <span>
                                     <button onClick={hideOptions}>Cancel</button>

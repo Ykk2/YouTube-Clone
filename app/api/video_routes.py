@@ -128,7 +128,7 @@ def new_video():
 #DELETE VIDEO BY videoID
 #USER MUST BE OWNER OF VIDEO
 @video_routes.route("/<int:videoId>", methods=['DELETE'])
-# @login_required
+@login_required
 def delete_video(videoId):
 
     try:
@@ -181,7 +181,7 @@ def dislike_video(videoId):
     like = Like.query.filter_by(user_id = current_user.id, video_id = videoId).first()
 
     if (like):
-        print("I'm here", like.liked)
+
         if (like.liked == "neutral"):
             setattr(like, 'liked', 'disliked')
             db.session.commit()

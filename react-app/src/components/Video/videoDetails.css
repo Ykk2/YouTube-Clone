@@ -1,6 +1,6 @@
 .video-details {
     position: absolute;
-    top: 10%;
+    top: 85px;
     display: flex;
     flex-direction: row;
     width: 88vw;
@@ -11,7 +11,6 @@
 
 .main-content {
     width: 76%;
-    border: 1px solid red;
     margin-bottom: 100px;
 }
 
@@ -113,7 +112,7 @@
     resize: none;
     font-size: 12px;
     padding: 0;
-    margin-left: 23px;
+    margin-left: 11px;
     border: none;
     border-bottom: 1px solid gray;
     border-radius: 0;
@@ -278,10 +277,15 @@
 }
 
 .subscribe-button {
-    background-color: rgb(241,241,241);
+    background-color: rgb(227, 227, 227);
     color:rgb(42,42,42);
     margin-left: 20px;
     width: 100px;
+    border-radius: 20px;
+}
+
+.subscribe-button:hover {
+    background-color: rgb(163, 163, 163);
 }
 
 .subscribed-button {
@@ -311,13 +315,15 @@
     height: 40px;
     position: absolute;
     border-radius: 7px;
-    top: 40px;
-    background-color:rgb(42,42,42);
+    top: 36px;
+    background-color:rgb(56, 56, 56);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+
 }
 
 .unsubscribed-button > span {
@@ -325,7 +331,7 @@
 }
 
 .unsubscribe {
-    background-color:rgb(42,42,42);
+    background-color:rgb(56, 56, 56);
     height: 65%;
     width: 100%;
     vertical-align: middle;
@@ -333,6 +339,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+
 }
 
 .unsubscribe:hover {
@@ -343,4 +350,35 @@
     background-color: transparent;
     color: transparent;
     -webkit-text-stroke: 0.5px white;
+}
+
+
+.video-description {
+    margin: auto;
+    background-color:rgb(42,42,42);
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    height: auto;
+}
+
+.video-description > div {
+    background-color:rgb(42,42,42);
+    padding-top: 5px;
+    font-size: 13px;
+}
+
+
+.video-description > span {
+    font-size: 13px;
+}
+
+.comment-total {
+    width: 94%;
+    margin: auto;
+}
+
+#profile-pic-comment {
+    padding-left: 10px;
 }

@@ -23,7 +23,7 @@ const CommentCard = ({ comment }) => {
 
 
     const commentOwner = (commentorId) => {
-        if (+commentorId === +user.id) return true
+        if (+commentorId === +user?.id) return true
         else return false
     }
 

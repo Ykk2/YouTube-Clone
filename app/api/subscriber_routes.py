@@ -20,15 +20,16 @@ def subscribe(userId):
     subscriber = User.query.get(current_user.id)
     user = User.query.get(userId)
 
-    if (user.subscribed.filter(subscribers.c.subscriber_id == subscribers.user_id).count() > 0):
+    if (user.subscribers.filter(subscribers.c.subscriber_id == current_user.id).first()):
         return { "error": "User is already following this user"}
 
-    user.subscribed.append(subscriber)
+    user.subscribers.append(subscriber)
 
     db.session.commit()
 
     return {"message": "Succesfully subscribed",
             "user": user.to_dict()}
+
 
 @subscriber_routes.route("/<int:userId>", methods=['DELETE'])
 @login_required
@@ -37,10 +38,10 @@ def unsubscribe(userId):
     subscriber = User.query.get(current_user.id)
     user = User.query.get(userId)
 
-    if (user.subscribed.filter(subscribers.c.subscriber_id == subscribers.user_id).count() <= 0):
+    if (not user.subscribers.filter(subscribers.c.subscriber_id == current_user.id).first()):
         return { "error": "User does not follow this user yet"}
 
-    user.subscribed.remove(subscriber)
+    user.subscribers.remove(subscriber)
     db.session.commit()
 
     return {'message': "Succesfully unsubscribed"}

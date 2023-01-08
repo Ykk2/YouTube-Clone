@@ -1,10 +1,10 @@
-
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getVideos } from "../../store/videos"
 import SideBar from '../Sidebar/SideBar';
 import NavBar from "../Navigation/NavBar";
 import { NavLink } from "react-router-dom";
+import { dateConverter, viewsConverter } from "../../store/helper";
 import './home.css'
 
 
@@ -39,7 +39,7 @@ const HomePage = () => {
                                 <div id="video-card-info-right">
                                     <p>{video.title}</p>
                                     <p>{video.user.username}</p>
-                                    <span>{video.totalViews} views {video.createdAt}</span>
+                                    <span>{viewsConverter(video.totalViews)} {dateConverter(video.createdAt)}</span>
                                 </div>
                             </div>
                         </div>

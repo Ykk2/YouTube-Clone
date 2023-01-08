@@ -37,8 +37,13 @@ const NavBar = () => {
 
     return (
         <div className="NavBar">
-            <div className="NavBar-left">
-                <div onClick={handleHomeClick}>home</div>
+            <div onClick={handleHomeClick} className="NavBar-left">
+                    <img className="logo" src={require('../../assets/images/youtube-logo-2431.svg').default} alt='svgImage' />
+                    <span>u</span>
+                    <span>T</span>
+                    <span>u</span>
+                    <span>b</span>
+                    <span>e</span>
             </div>
             <div className="NavBar-right">
                 { user ?

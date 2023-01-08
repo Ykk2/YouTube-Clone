@@ -5,7 +5,15 @@ const SideBar = () => {
 
     return (
         <div className="SideBar">
-            SideBar
+            <div>
+                top
+            </div>
+            <div>
+                middle
+            </div>
+            <div>
+                bottom
+            </div>
         </div>
     )
 }

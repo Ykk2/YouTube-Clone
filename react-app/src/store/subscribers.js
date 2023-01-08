@@ -35,9 +35,8 @@ export const getSubscribedList = () => async (dispatch) => {
 
 
 export const subscribe = (userId) => async (dispatch) => {
-
   const response = await fetch(`/api/subscribers/${userId}`, {
-    methods: "POST"
+    method: "POST"
   })
 
   if (response.ok) {
@@ -60,7 +59,7 @@ export const subscribe = (userId) => async (dispatch) => {
 export const unsubscribe = (userId) => async (dispatch) => {
 
     const response = await fetch(`/api/subscribers/${userId}`, {
-      methods: "DELETE"
+      method: "DELETE"
     })
 
     if (response.ok) {
@@ -91,13 +90,13 @@ export default function reducer(state = { subscribed: {} }, action) {
 
     case ADD_SUBSCRIBER: {
       const newState = { subscribed: {...state.subscribed} }
-      newState.subscribed[action.data.user.id] = action.data.user
+      newState.subscribed[action.data.id] = action.data
       return newState
     }
 
     case REMOVE_SUBSCRIBER: {
       const newState = { subscribed: {...state.subscribed}}
-      delete newState.subscribed[action.data.userId]
+      delete newState.subscribed[action.data]
       return newState
     }
     default:
