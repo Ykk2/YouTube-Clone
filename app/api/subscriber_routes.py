@@ -5,10 +5,9 @@ from ..models import db, Video, Comment, subscribers, Like, User
 
 subscriber_routes = Blueprint("subscribers", __name__)
 
-@subscriber_routes.route("/<int:userId>")
+@subscriber_routes.route("/")
 @login_required
 def subscribed_list():
-    print("*****************************************************************")
     user = User.query.get(current_user.id)
     list = user.subscribed.all()
     return {'subscribed' :[channel.to_dict() for channel in list]}

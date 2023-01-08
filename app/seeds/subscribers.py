@@ -13,11 +13,11 @@ def seed_subscribers():
         },
         {
             "user_id": 2,
-            "subscriber_id": 4
+            "subscriber_id": 1
         },
         {
             "user_id": 3,
-            "subscriber_id": 5
+            "subscriber_id": 1
         },
         {
             "user_id": 4,

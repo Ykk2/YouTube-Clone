@@ -18,14 +18,17 @@ const VideoDetails = () => {
     const video = useSelector(state => state.videos.video)
     const comments = useSelector(state => Object.values(state.comments.comments))
     const user = useSelector(state => state.session.user)
+    const subscribedList = useSelector(state => Object.values(state.subscribers.subscribed))
 
     const [focused, setFocused] = useState(false)
     const [comment, setComment] = useState("")
     const [commentSubmit, setCommentSubmit] = useState("")
     const [liked, setLiked] = useState("")
     const [disliked, setDisliked] = useState("")
+    const [subscribed, setSubscribed] = useState()
+    const [ showUnsubscribe, setShowUnsubscribe] = useState(false)
 
-
+    // useEffect for initial data load and state change
     useEffect(() => {
         dispatch(getComments(videoId))
         dispatch(getVideos())
@@ -36,6 +39,7 @@ const VideoDetails = () => {
     }, [dispatch, videoId, user])
 
 
+    // useEffect to track upvote/downvote mechanism
     useEffect(() => {
         if (video.userLiked === "liked") {
             setLiked("liked")
@@ -51,10 +55,18 @@ const VideoDetails = () => {
     }, [video])
 
 
+    // useEffect to disable/enable comment button
     useEffect(() => {
         if (comment.length <= 0 || !comment.trim()) setCommentSubmit('comment-not-ready')
         else setCommentSubmit('comment-ready')
     }, [comment])
+
+
+    // useEffect to check if user is subscribed to video owner
+    useEffect(() => {
+        const found = subscribedList.find(user => user.id === video.ownerId)
+        if (found) setSubscribed(true)
+    }, [subscribedList])
 
 
     const updateComment = (e) => {
@@ -74,6 +86,16 @@ const VideoDetails = () => {
     const handleSubscribeClick = (e) => {
         e.preventDefault()
 
+    }
+
+    const handleUnsubscribeClick = (e) => {
+        e.preventDefault()
+    }
+
+    const handleShowUnsubscribe = (e) => {
+        e.preventDefault()
+        if (!showUnsubscribe) setShowUnsubscribe(true)
+        else setShowUnsubscribe(false)
     }
 
     const handleLikeClick = (e) => {
@@ -122,9 +144,31 @@ const VideoDetails = () => {
                                         <div>{video?.user?.subscribers} {+video?.user?.subscribers <= 1 ? "subscriber" : "subscriber"}</div>
                                     </div>
                                 </div>
-                                <button className="subscribe-button">
-                                    Subscribe
-                                </button>
+                                {
+                                subscribed ?
+
+                                    <button onClick={handleShowUnsubscribe} className="subscribed-button">
+                                        <i class="fa-regular fa-bell"></i>
+                                            Subscribed
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                        {
+                                        showUnsubscribe ?
+                                        <div className="notification-menu">
+
+                                            <div className="unsubscribe">
+                                                <i class="fa-solid fa-user-minus fa-flip-horizontal"></i>
+                                                <span>unsubscribe</span>
+                                            </div>
+                                        </div>
+                                        :
+                                        null
+                                        }
+                                    </button>
+                                    :
+                                    <button className="subscribe-button">
+                                        Subscribe
+                                    </button>
+                                }
                             </div>
                             <div id="channel-info-right">
                                 <div className={`channel-info-right-upvote ${liked}`} onClick={handleLikeClick}>

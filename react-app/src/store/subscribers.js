@@ -20,8 +20,8 @@ const removeSubscriber = (userId) => ({
 });
 
 
-export const getSubscribedList = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/subscribers/${userId}`)
+export const getSubscribedList = () => async (dispatch) => {
+    const response = await fetch(`/api/subscribers/`)
 
     if (response.ok) {
         const data = await response.json()
@@ -85,7 +85,7 @@ export default function reducer(state = { subscribed: {} }, action) {
   switch (action.type) {
     case LOAD_SUBSCRIBED: {
       const newState = { subscribed: {} }
-      newState.subscribed = normalize(action.data.subscribedList)
+      newState.subscribed = normalize(action.data.subscribed)
       return newState
     }
 
