@@ -20,8 +20,8 @@ const removeSubscriber = (userId) => ({
 });
 
 
-export const subscribedList = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/subscriber/${userId}`)
+export const getSubscribedList = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/subscribers/${userId}`)
 
     if (response.ok) {
         const data = await response.json()
@@ -36,7 +36,7 @@ export const subscribedList = (userId) => async (dispatch) => {
 
 export const subscribe = (userId) => async (dispatch) => {
 
-  const response = await fetch(`/api/subscriber/${userId}`, {
+  const response = await fetch(`/api/subscribers/${userId}`, {
     methods: "POST"
   })
 
@@ -59,7 +59,7 @@ export const subscribe = (userId) => async (dispatch) => {
 
 export const unsubscribe = (userId) => async (dispatch) => {
 
-    const response = await fetch(`/api/subscriber/${userId}`, {
+    const response = await fetch(`/api/subscribers/${userId}`, {
       methods: "DELETE"
     })
 

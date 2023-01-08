@@ -81,7 +81,7 @@ def upgrade():
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('user_id', sa.Integer(), nullable=False),
         sa.Column('video_id', sa.Integer(), nullable=False),
-        sa.Column('liked', sa.Boolean()),
+        sa.Column('liked', sa.String(), default="neutral"),
         sa.PrimaryKeyConstraint('id'),
         sa.ForeignKeyConstraint(['user_id'], ['users.id']),
         sa.ForeignKeyConstraint(['video_id'], ['videos.id'])

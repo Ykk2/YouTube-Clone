@@ -6,37 +6,37 @@ def seed_likes():
         {
             "user_id": 1,
             "video_id": 1,
-            "liked": True
+            "liked": "neutral"
         },
         {
             "user_id": 2,
             "video_id": 1,
-            "liked": True
+            "liked": "neutral"
         },
         {
             "user_id": 3,
             "video_id": 2,
-            "liked": True
+            "liked": "neutral"
         },
         {
             "user_id": 4,
             "video_id": 2,
-            "liked": True
+            "liked": "neutral"
         },
         {
             "user_id": 5,
             "video_id": 2,
-            "liked": True
+            "liked": "neutral"
         },
         {
             "user_id": 6,
             "video_id": 3,
-            "liked": True
+            "liked": "neutral"
         },
         {
             "user_id": 2,
             "video_id": 3,
-            "liked": True
+            "liked": "neutral"
         }
     ]
 

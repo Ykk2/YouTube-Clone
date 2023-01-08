@@ -7,6 +7,9 @@ const EDIT_VIDEO = 'video/EDIT_VIDEO'
 const DELETE_VIDEO = 'video/DELETE_VIDEO'
 const UPVOTE_VIDEO = 'video/UPVOTE_VIDEO'
 const DOWNVOTE_VIDEO = 'video/DOWNVOTE_VIDEO'
+const NEUTRAL_VIDEO = 'video/NEUTRAL_VIDEO'
+const LIKE_VIDEO = 'video/LIKE_VIDEO'
+const DISLIKE_VIDEO = 'video/DISLIKE_VIDEO'
 
 const loadVideos = (videos) => ({
   type: LOAD_VIDEOS,
@@ -43,13 +46,36 @@ const downvote = (videoId) => ({
   data: videoId
 })
 
+const setNeutral = (videoId) => ({
+  type: NEUTRAL_VIDEO,
+  data: videoId
+})
+
+const setLiked = (videoId) => ({
+  type: LIKE_VIDEO,
+  data: videoId
+})
+
+const setDisliked = (videoId) => ({
+  type: DISLIKE_VIDEO,
+  data: videoId
+})
+
 export const upvoteVideo = (videoId) => async (dispatch) => {
   const response = await fetch(`/api/videos/${videoId}/like`, {
-    methods: "POST"
+    method: "POST"
   })
   if (response.ok) {
+    const data = await response.json()
 
-    dispatch(upvote(videoId))
+    if (data.user.liked === 'liked') {
+      return (dispatch(upvote(videoId)), dispatch(setLiked(videoId)))
+    }
+
+    if (data.user.liked === 'neutral') {
+      return (dispatch(downvote(videoId)), dispatch(setNeutral(videoId)))
+    }
+
     return null
 
   } else if (response.status < 500) {
@@ -66,12 +92,26 @@ export const upvoteVideo = (videoId) => async (dispatch) => {
 
 export const downvoteVideo = (videoId) => async (dispatch) => {
   const response = await fetch(`/api/videos/${videoId}/dislike`, {
-    methods: "POST"
+    method: "POST"
   })
   if (response.ok) {
+    const data = await response.json()
 
-    dispatch(downvote(videoId))
-    return null
+    if (data.status === "new") {
+      return (dispatch(setDisliked(videoId)))
+    }
+
+    if (data.user.liked ==='disliked' && data.status ==="previously liked") {
+      return dispatch(setDisliked(videoId), dispatch(downvote(videoId)))
+    }
+
+    if (data.user.liked === 'disliked') {
+      return dispatch(setDisliked(videoId))
+    }
+
+    if (data.user.liked ==='neutral') {
+      return (dispatch(setNeutral(videoId)))
+    }
 
   } else if (response.status < 500) {
     const data = await response.json();
@@ -252,6 +292,24 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
       const newState = { videos: { ...state.videos }, video: { ...state.video } }
       newState.video.likes--
       return newState
+
+    case LIKE_VIDEO: {
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
+      newState.video.userLiked = 'liked'
+      return newState
+    }
+
+    case DISLIKE_VIDEO: {
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
+      newState.video.userLiked = 'disliked'
+      return newState
+    }
+
+    case NEUTRAL_VIDEO: {
+      const newState = { videos: { ...state.videos }, video: { ...state.video } }
+      newState.video.userLiked = 'neutral'
+      return newState
+    }
 
     default:
       return state;

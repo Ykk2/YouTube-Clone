@@ -84,7 +84,7 @@ def edit_video(videoId):
 # @login_required
 def new_video():
     # form = VideoForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    # form['csrf_token'].data = request.cookies['csrf_token']
     # print("********************** FORM.DATA", form.data)
     if "video" not in request.files:
         return {"errors": "video is required"}, 400
@@ -143,40 +143,34 @@ def delete_video(videoId):
         return {"error": "requested video not found"}, 404
 
 
-#INCREASE VIEW COUNT
-
-# @video_routes.route('/<int:videoId>/view', methods=['PUT'])
-# def increase_view_count(videoId):
-
-#     video = Video.query.get(videoId)
-#     new_view_count = video.total_views + 1
-#     setattr(video, "total_views", new_view_count)
-
-#     db.session.commit()
-
-#     return video.to_dict()
-
 
 #LIKE A VIDEO
 #MUST BE LOGGED IN
 @video_routes.route('/<int:videoId>/like', methods=['POST'])
 def like_video(videoId):
 
-    like = Like.query.filter_by(user_id = 1, video_id = videoId).first()
+    like = Like.query.filter_by(user_id = current_user.id, video_id = videoId).first()
 
-    if (like.liked == False):
-        setattr(like, 'liked', True)
-        return { "message": "User liked the video"}
+    if(like):
 
-    elif (like.liked == True):
-        return {"message": "User already liked the video"}
+        if (like.liked == "neutral" or like.liked == "disliked"):
+            setattr(like, 'liked', 'liked')
+            db.session.commit()
+            return { "user": like.to_dict() }
 
+        elif (like.liked == "liked"):
+            setattr(like, 'liked', 'neutral')
+            db.session.commit()
+            return { "user": like.to_dict() }
 
-    new_like = Like(user_id = current_user.id, video_id = videoId, liked = True)
-    db.session.add(new_like)
+    else:
+        new_like = Like(user_id = current_user.id, video_id = videoId, liked = "liked")
+        db.session.add(new_like)
+
     db.session.commit()
 
-    return { "message": "User liked the video"}
+    return { "user": like.to_dict(),
+             "status": "new" }
 
 #DISLIKE A VIDEO
 #MUST BE LOGGED IN
@@ -186,15 +180,30 @@ def dislike_video(videoId):
 
     like = Like.query.filter_by(user_id = current_user.id, video_id = videoId).first()
 
-    if (like.liked == True):
-        setattr(like, 'liked', False)
-        return { "message": "User disliked the video"}
+    if (like):
+        print("I'm here", like.liked)
+        if (like.liked == "neutral"):
+            setattr(like, 'liked', 'disliked')
+            db.session.commit()
+            return { "user": like.to_dict() }
 
-    elif (like.liked == False):
-        return {"message": "User already dis-liked the video"}
+        elif (like.liked == 'liked'):
+            setattr(like, 'liked', 'disliked')
+            db.session.commit()
+            return { "user": like.to_dict(),
+                    "status": "previously liked"}
 
-    new_like = Like(user_id = 1, video_id = videoId, liked = False)
-    db.session.add(new_like)
+
+        elif (like.liked == 'disliked'):
+            setattr(like, 'liked', 'neutral')
+            db.session.commit()
+            return { "user": like.to_dict() }
+
+    else:
+        new_like = Like(user_id = current_user.id, video_id = videoId, liked = 'disliked')
+        db.session.add(new_like)
+
     db.session.commit()
 
-    return { "message": "User dis-liked the video"}
+    return {"user": like.to_dict(),
+            "status": "new"}

@@ -9,7 +9,7 @@ class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     video_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('videos.id')), nullable=False)
-    liked = db.Column(db.Boolean)
+    liked = db.Column(db.String, default="neutral")
 
     users = db.relationship('User', back_populates='likes')
     videos = db.relationship('Video', back_populates='likes')

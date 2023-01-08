@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { useParams, NavLink } from "react-router-dom";
 import { getComments, postComment } from "../../store/comments"
-import { getVideo, getVideos } from "../../store/videos"
+import { getVideo, getVideos, upvoteVideo, downvoteVideo } from "../../store/videos"
+import { getSubscribedList } from "../../store/subscribers";
 import NavBar from "../Navigation/NavBar";
 import CommentCard from "./CommentCard";
 import './videoDetails.css'
@@ -11,24 +12,43 @@ import './videoDetails.css'
 const VideoDetails = () => {
 
     const dispatch = useDispatch()
-
     const { videoId } = useParams()
+
     const videos = useSelector(state => Object.values(state.videos.videos))
     const video = useSelector(state => state.videos.video)
     const comments = useSelector(state => Object.values(state.comments.comments))
-
+    const user = useSelector(state => state.session.user)
 
     const [focused, setFocused] = useState(false)
     const [comment, setComment] = useState("")
     const [commentSubmit, setCommentSubmit] = useState("")
-    const [commentError, setCommentError] = useState(false)
+    const [liked, setLiked] = useState("")
+    const [disliked, setDisliked] = useState("")
 
 
     useEffect(() => {
         dispatch(getComments(videoId))
         dispatch(getVideos())
         dispatch(getVideo(videoId))
-    }, [dispatch, videoId])
+        if (user) {
+            dispatch(getSubscribedList(user.id))
+        }
+    }, [dispatch, videoId, user])
+
+
+    useEffect(() => {
+        if (video.userLiked === "liked") {
+            setLiked("liked")
+            setDisliked("")
+        }
+        else if (video.userLiked === "disliked") {
+            setDisliked("disliked")
+            setLiked("")
+        } else if (video.userLiked === "neutral") {
+            setDisliked("")
+            setLiked("")
+        }
+    }, [video])
 
 
     useEffect(() => {
@@ -37,27 +57,40 @@ const VideoDetails = () => {
     }, [comment])
 
 
-
     const updateComment = (e) => {
         e.preventDefault()
         setComment(e.target.value)
         e.target.style.height = "10px"
         e.target.style.height = `${e.target.scrollHeight}px`
-
     }
 
     const handleCommentSubmit = (e) => {
         e.preventDefault()
-
         dispatch(postComment({comment}, videoId))
         setFocused(false)
         setComment("")
     }
 
-    const showOptions = () => {
-        setFocused(true)
+    const handleSubscribeClick = (e) => {
+        e.preventDefault()
 
     }
+
+    const handleLikeClick = (e) => {
+        e.preventDefault()
+        setLiked("liked")
+        dispatch(upvoteVideo(videoId))
+    }
+
+    const handleDisLikeclick = (e) => {
+        e.preventDefault()
+        dispatch(downvoteVideo(videoId))
+    }
+
+    const showOptions = () => {
+        setFocused(true)
+    }
+
 
     const hideOptions = () => {
         setFocused(false)
@@ -65,7 +98,6 @@ const VideoDetails = () => {
         const textArea = document.getElementById("textarea")
         textArea.style.height = "10px"
     }
-
 
     return (
         <>
@@ -87,21 +119,25 @@ const VideoDetails = () => {
                                     </div>
                                     <div>
                                         <div>{video?.user?.username}</div>
-                                        <div>{video?.user?.subscribers} subscribers</div>
+                                        <div>{video?.user?.subscribers} {+video?.user?.subscribers <= 1 ? "subscriber" : "subscriber"}</div>
                                     </div>
                                 </div>
-                                <button>
+                                <button className="subscribe-button">
                                     Subscribe
                                 </button>
                             </div>
                             <div id="channel-info-right">
-                                <button>Upvote</button>
-                                <span>{video.likes}</span>
-                                <button>Downvote</button>
+                                <div className={`channel-info-right-upvote ${liked}`} onClick={handleLikeClick}>
+                                    <i className={`fa-sharp fa-solid fa-thumbs-up ${liked}`}></i>
+                                    <span>{video.likes}</span>
+                                </div>
+                                <div className={`channel-info-right-downvote ${disliked}`} onClick={handleDisLikeclick}>
+                                    <i className={`fa-solid fa-thumbs-down fa-flip-horizontal ${disliked}`}></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="comment-total">
                         {`${comments.length} Comments`}
                     </div>
                     <div className="comment-box">
