@@ -81,7 +81,7 @@ def edit_video(videoId):
 #CREATE VIDEO
 #USER MUST BE LOGGED IN
 @video_routes.route('/new', methods=["POST"])
-# @login_required
+@login_required
 def new_video():
     # form = VideoForm()
     # form['csrf_token'].data = request.cookies['csrf_token']
@@ -147,6 +147,7 @@ def delete_video(videoId):
 #LIKE A VIDEO
 #MUST BE LOGGED IN
 @video_routes.route('/<int:videoId>/like', methods=['POST'])
+@login_required
 def like_video(videoId):
 
     like = Like.query.filter_by(user_id = current_user.id, video_id = videoId).first()
@@ -166,16 +167,19 @@ def like_video(videoId):
     else:
         new_like = Like(user_id = current_user.id, video_id = videoId, liked = "liked")
         db.session.add(new_like)
+        db.session.commit()
+        return { "user": new_like.to_dict(),
+             "status": "new" }
 
     db.session.commit()
 
-    return { "user": like.to_dict(),
-             "status": "new" }
+    return { "status": "new" }
 
 #DISLIKE A VIDEO
 #MUST BE LOGGED IN
 
 @video_routes.route('/<int:videoId>/dislike', methods=['POST'])
+@login_required
 def dislike_video(videoId):
 
     like = Like.query.filter_by(user_id = current_user.id, video_id = videoId).first()
@@ -202,8 +206,10 @@ def dislike_video(videoId):
     else:
         new_like = Like(user_id = current_user.id, video_id = videoId, liked = 'disliked')
         db.session.add(new_like)
+        db.session.commit()
+        return {"user": like.to_dict(),
+            "status": "new"}
 
     db.session.commit()
 
-    return {"user": like.to_dict(),
-            "status": "new"}
+    return {"status": "new"}

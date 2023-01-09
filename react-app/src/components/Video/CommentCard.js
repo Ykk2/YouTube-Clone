@@ -59,7 +59,7 @@ const CommentCard = ({ comment }) => {
                 showCommentEditBox ?
                     <div className="edit-comment-box">
                         <div>
-                            icon
+
                         </div>
                         <div className="edit-comment-box-textarea">
                             <textarea
@@ -77,7 +77,7 @@ const CommentCard = ({ comment }) => {
                     </div>
                     :
                     <div className="comment-card">
-                        <div>icon</div>
+                        <div></div>
                         <div className="comment">
                             <span>{comment?.user?.username}</span>
                             <span>{dateConverter(comment?.createdAt)}</span>

@@ -8,6 +8,14 @@
     padding-bottom: 25px;
 }
 
+.monkey {
+    height: 360px;
+    width: 700px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+}
+
 .video-upload-video {
     display: flex;
     flex-direction: column;
@@ -144,4 +152,10 @@
     width: 100%;
     color: red;
     font-size: 10px;
+}
+
+.video-upload-loading {
+    background-color: green;
+    color: green;
+    margin: auto;
 }

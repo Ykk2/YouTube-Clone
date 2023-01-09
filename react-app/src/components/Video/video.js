@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, useHistory } from "react-router-dom";
 import { getComments, postComment } from "../../store/comments"
 import { getVideo, getVideos, upvoteVideo, downvoteVideo } from "../../store/videos"
 import { getSubscribedList, subscribe, unsubscribe } from "../../store/subscribers";
@@ -11,7 +11,7 @@ import './videoDetails.css'
 
 
 const VideoDetails = () => {
-
+    const history = useHistory()
     const dispatch = useDispatch()
     const { videoId } = useParams()
 
@@ -80,6 +80,9 @@ const VideoDetails = () => {
 
     const handleCommentSubmit = (e) => {
         e.preventDefault()
+        if (!user) {
+           return history.push('/login')
+        }
         dispatch(postComment({comment}, videoId))
         setFocused(false)
         setComment("")
@@ -87,12 +90,17 @@ const VideoDetails = () => {
 
     const handleSubscribeClick = (e) => {
         e.preventDefault()
+        if (!user) {
+            return history.push('/login')
+         }
         dispatch(subscribe(video.ownerId))
-
     }
 
     const handleUnsubscribeClick = (e) => {
         e.preventDefault()
+        if (!user) {
+            return history.push('/login')
+        }
         dispatch(unsubscribe(video.ownerId))
     }
 
@@ -103,12 +111,18 @@ const VideoDetails = () => {
     }
 
     const handleLikeClick = (e) => {
+        if (!user) {
+            return history.push('/login')
+        }
         e.preventDefault()
         setLiked("liked")
         dispatch(upvoteVideo(videoId))
     }
 
     const handleDisLikeclick = (e) => {
+        if (!user) {
+            return history.push('/login')
+        }
         e.preventDefault()
         dispatch(downvoteVideo(videoId))
     }
@@ -141,7 +155,7 @@ const VideoDetails = () => {
                             <div id="channel-info-left">
                                 <div id="channel-info-left-left">
                                     <div>
-                                        icon
+
                                     </div>
                                     <div>
                                         <div>{video?.user?.username}</div>
@@ -193,7 +207,7 @@ const VideoDetails = () => {
                     </div>
                     <div className="comment-box">
                         <div id="profile-pic-comment">
-                            circle
+
                         </div>
                         <div>
                             <textarea
