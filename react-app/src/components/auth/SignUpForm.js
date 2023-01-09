@@ -1,4 +1,4 @@
-import { AuthenticationMD5Password } from 'pg-protocol/dist/messages';
+
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
@@ -10,7 +10,7 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  const [errors, setErrors] = useState([]);
+
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [username, setUsername] = useState('');
@@ -27,19 +27,6 @@ const SignUpForm = () => {
   const [passwordError, setPassWordError] = useState('')
   const [repeatPasswordError, setRepeatPasswordError] = useState('')
 
-  // useEffect for error handling
-  // useEffect(() => {
-  //   if (firstName.length <= 0 || !firstName.trim()) setFirstNameError("First Name is required")
-  //   if (lastName.length <= 0 || !lastName.trim()) setLastNameError("Last Name is required")
-  //   if (username.length <= 0 || !username.trim()) setUserNameError("Username is required")
-  //   if (email.length <= 0 || !email.trim()) setEmailError("Email is required")
-  //   if (password.length <= 0 || !password.trim()) setPassWordError("password is required")
-  //   if (repeatPassword.length <= 0 || !repeatPassword.trim()) setRepeatPasswordError("please confirm password")
-  //   if (password.length < 8) setPassWordError("password must be at least 8 characters")
-  //   if (password !== repeatPassword) setRepeatPasswordError("Password and Repeat Password must match")
-  //   if (!email.includes('@') || !email.includes(".")) setEmailError("Invalid email.")
-
-  // }, [firstName, lastName, username, email, password, repeatPassword])
 
 
   useEffect(() => {
@@ -132,9 +119,7 @@ const SignUpForm = () => {
       </div>
       <div className="signup-form-left">
         <div>
-          {/* {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))} */}
+
         </div>
         <div className="signup-form-left-top">
           <div>Google</div>
