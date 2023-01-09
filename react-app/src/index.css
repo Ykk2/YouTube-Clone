@@ -52,3 +52,21 @@ input:focus {
 textarea:focus {
     outline: 1px rgb(62, 166, 255) solid;
 }
+
+button:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 4em;
+    left: 0;
+    top:0;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 5px 20px white;
+  }
+
+button{
+    cursor: pointer;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; /* Safari */
+  }

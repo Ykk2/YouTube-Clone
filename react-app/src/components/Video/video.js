@@ -92,7 +92,7 @@ const VideoDetails = () => {
         e.preventDefault()
         if (!user) {
             return history.push('/login')
-         }
+        }
         dispatch(subscribe(video.ownerId))
     }
 
