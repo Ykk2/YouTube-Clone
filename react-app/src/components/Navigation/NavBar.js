@@ -59,7 +59,7 @@ const NavBar = () => {
                 { showMenu && user ?
                 <div className="navbar-dropdown-menu">
                     <div>
-                        <div>circle</div>
+                        <div></div>
                         <div className="dropdown-userinfo">
                             <div>{user.firstName} {user.lastName}</div>
                             <div>{`@${user.username}`}</div>

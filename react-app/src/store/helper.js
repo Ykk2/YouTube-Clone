@@ -45,7 +45,7 @@ export const viewsConverter = (views) => {
   const millions = Number.parseFloat(views/1000000).toFixed(1)
   const tensThousands = Number.parseFloat(views/10000).toFixed(0)
 
-  console.log(views, thousand, tensThousands,  millions)
+
 
   if (views === 0) return `${views} views`
   if (views === 1) return `${views} view`

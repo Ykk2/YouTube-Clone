@@ -34,7 +34,7 @@ const HomePage = () => {
                             </video>
                             <div className="video-card-info">
                                 <div id="video-card-info-left">
-                                    circle
+
                                 </div>
                                 <div id="video-card-info-right">
                                     <p>{video.title}</p>

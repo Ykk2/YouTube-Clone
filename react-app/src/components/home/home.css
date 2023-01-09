@@ -1,28 +1,27 @@
 .main-page {
     position: fixed;
-    left: 10.5%;
+    left: 160px;
     top: 100px;
     width: 90%;
     height: 100vh;
     padding-left: 3%;
     padding-right: 3%;
     display: flex;
-    align-items: flex-start;
+    align-content: flex-start;
     justify-content: flex-start;
     flex-direction: row;
-
+    flex-wrap: wrap;
 }
 
 .video-card {
     display:flex;
     flex-direction: column;
-    min-width: 250px;
-    min-height: 200px;
-    width: 18vw;
-    height: 14vw;
+    width: 250px;
+    height: 200px;
     margin-top: 2%;
     margin-left: 20px;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 .video-card > video {
@@ -39,18 +38,34 @@
     flex-direction: row;
 }
 
-#video-card-info-right :nth-child(1) {
-
+#video-card-info-right p:nth-child(1) {
+    padding-top: 5px;
     font-size: 12px;
-    margin: 0
+    margin: 0;
+    white-space: pre-wrap;
+    white-space: pre-line;
+    word-wrap: break-word;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+            line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.video-card-info-right {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
 }
 
 #video-card-info-right :nth-child(2) {
-
     font-size: 12px;
     margin: 0
 }
 
 #video-card-info-right > span {
     font-size: 12px;
+
 }

@@ -152,14 +152,14 @@ const VideoDetails = () => {
                                 subscribed ?
 
                                     <button onClick={handleShowUnsubscribe} className="subscribed-button">
-                                        <i class="fa-regular fa-bell"></i>
+                                        <i className="fa-regular fa-bell"></i>
                                             Subscribed
-                                        <i class="fa-solid fa-chevron-down"></i>
+                                        <i className="fa-solid fa-chevron-down"></i>
                                         {
                                         showUnsubscribe ?
                                         <div className="notification-menu">
                                             <div onClick={handleUnsubscribeClick} className="unsubscribe">
-                                                <i class="fa-solid fa-user-minus fa-flip-horizontal"></i>
+                                                <i className="fa-solid fa-user-minus fa-flip-horizontal"></i>
                                                 <span>unsubscribe</span>
                                             </div>
                                         </div>

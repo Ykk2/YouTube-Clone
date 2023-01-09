@@ -13,8 +13,8 @@ const DeleteVideo = ({setDeleting, id}) => {
     const deleteVideoConfirm = (e) => {
         e.preventDefault()
         dispatch(deleteVideo(id))
-        .then(getUserVideos(user.id))
-        .then(setDeleting(false))
+        dispatch(getUserVideos(user.id))
+        setDeleting(false)
     }
 
     const cancelDelete = (e) => {

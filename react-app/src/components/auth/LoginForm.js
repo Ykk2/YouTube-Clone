@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -6,25 +6,55 @@ import './loginform.css'
 
 const LoginForm = () => {
 
-  const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const signUp = () => {(
-    history.push('/signup')
-  )}
+  const user = useSelector(state => state.session.user);
+
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [emailError, setEmailError ] = useState('')
+  const [passwordError, setPassWordError] = useState('')
+  const [showError, setShowError] = useState('')
+
+
+  useEffect(() => {
+    if (email.length <= 0 || !email.trim()) setEmailError("Email is required")
+    if (!email.includes('@') || !email.includes(".")) setEmailError("Invalid email.")
+    else setEmailError("")
+  }, [email])
+
+  useEffect(() => {
+    if (password.length <= 0 || !password.trim()) setPassWordError("password is required")
+    else setPassWordError("")
+
+  }, [password])
 
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    setShowError(true)
+    if (!emailError && !passwordError) {
+      setShowError(false)
+      const data = await dispatch(login(email, password));
+      if (data) {
+        if (data.email) {
+          setEmailError(data.email)
+          setShowError(true)
+        }
+        if (data.password) {
+          setPassWordError(data.password)
+          setShowError(true)
+        }
+      }
     }
   };
+
+  const signUp = () => {(
+    history.push('/signup')
+  )}
 
   const demoSignIn = async (e) => {
     e.preventDefault();
@@ -46,9 +76,7 @@ const LoginForm = () => {
   return (
     <form className="login-form" onSubmit={onLogin}>
       <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+
       </div>
       <div className="login-form-top">
         <div>Google</div>
@@ -63,6 +91,12 @@ const LoginForm = () => {
           value={email}
           onChange={updateEmail}
         />
+          {
+            showError ?
+              <div>{emailError}</div>
+              :
+              null
+          }
       </div>
       <div className="password-field-login">
           <label htmlFor='password'>Password</label>
@@ -72,13 +106,20 @@ const LoginForm = () => {
             value={password}
             onChange={updatePassword}
           />
+          {
+            showError ?
+              <div>{passwordError}</div>
+              :
+              null
+          }
       </div>
       <div>
-        Don't have an account? Log in as a <div onClick={demoSignIn}>Demo User</div>
+        Don't have an account? Log in as a
+        <div className="login-links" onClick={demoSignIn}>Demo User</div>
       </div>
       <div>
-        <span onClick={signUp}>Create Account</span>
-        <button type='submit'>Sign in</button>
+        <span className="login-links" onClick={signUp}>Create Account</span>
+        <button className="login-links" type='submit'>Sign in</button>
       </div>
     </form>
   );

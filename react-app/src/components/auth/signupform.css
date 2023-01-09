@@ -42,12 +42,14 @@
     border-radius: 5px;
     height: 100%;
     margin-right: 30px;
+    background-color: transparent;
 }
 
 .signup-first-last div:nth-child(2) > input {
     border: 1px solid gray;
     border-radius: 5px;
     height: 100%;
+    background-color: transparent;
 }
 
 .signup-first-last div:nth-child(1) > label {
@@ -76,6 +78,7 @@
     border: 1px solid gray;
     border-radius: 5px;
     height: 100%;
+    background-color: transparent;
 }
 
 .signup-form-left div:nth-child(4) > label {
@@ -95,6 +98,7 @@
     border: 1px solid gray;
     border-radius: 5px;
     height: 100%;
+    background-color: transparent;
 }
 
 .signup-form-left div:nth-child(5) > label {
@@ -144,13 +148,14 @@
     border-radius: 5px;
     height: 100%;
     margin-right: 30px;
+    background-color: transparent;
 }
 
 .signup-form-password-confirm div:nth-child(2) > input {
     border: 1px solid gray;
     border-radius: 5px;
     height: 100%;
-
+    background-color: transparent;
 }
 
 .signup-form-left > button {
@@ -176,4 +181,32 @@
 .signup-form-left-top div:nth-child(3) {
     font-size: 15px;
     font-family: Roboto-Thin;
+}
+
+.signup-first-last > div> div:nth-child(3) {
+    position: absolute;
+    font-size: 11px;
+    color: red;
+    background-color: transparent;
+}
+
+.signup-username > div {
+    position: absolute;
+    font-size: 11px;
+    color: red;
+    background-color: transparent;
+}
+
+.signup-email > div {
+    position: absolute;
+    font-size: 11px;
+    color: red;
+    background-color: transparent;
+}
+
+.signup-form-password-confirm > div > div:nth-child(3) {
+    position: absolute;
+    font-size: 11px;
+    color: red;
+    background-color: transparent;
 }

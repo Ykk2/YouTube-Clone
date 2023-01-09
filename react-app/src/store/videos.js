@@ -151,10 +151,11 @@ export const getUserVideos = (userId) => async (dispatch) => {
   const response = await fetch(`/api/videos/user/${userId}`);
   if (response.ok) {
     const data = await response.json();
-
-    dispatch(loadVideos(data))
-    return null
-
+    if (data) {
+      console.log(data)
+      dispatch(loadVideos(data))
+      return null
+    }
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
@@ -190,7 +191,6 @@ export const postVideo = (video) => async (dispatch) => {
     method: "POST",
     body: video
   });
-
   if (response.ok) {
     const data = await response.json()
     dispatch(createVideo(data))
@@ -237,12 +237,34 @@ export const deleteVideo = (videoId) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(removeVideo(videoId))
+    }
 
-  } else if (response.status < 500) {
+    else if (response.status < 500) {
     const data = await response.json()
 
     if (data.errors) {
       return data.errors
+    }
+
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const getUserSubscribedVideos = (userId) => async (dispatch) => {
+
+  const response = await fetch(`/api/videos/user/subscribed/${userId}`);
+  if (response.ok) {
+    const data = await response.json();
+    if (data) {
+      console.log(data)
+      dispatch(loadVideos(data))
+      return null
+    }
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
     }
 
   } else {
@@ -278,7 +300,8 @@ export default function reducer(state = { videos: {}, video: {} }, action) {
     /* falls through */
     case DELETE_VIDEO: {
       const newState = { videos: { ...state.videos }, video: { ...state.video } }
-      delete newState.videos[action.data.videoId]
+
+      delete newState.videos[action.data]
       return newState
     }
 

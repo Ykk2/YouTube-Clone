@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import CommentEdit from "./CommentEdit";
 import { useState, useEffect } from "react";
 import { putComment } from "../../store/comments";
+import { dateConverter } from "../../store/helper";
 import './commentCard.css'
 
 
@@ -47,10 +48,10 @@ const CommentCard = ({ comment }) => {
         dispatch(putComment(data))
     }
 
-    const dateConverter = (date) => {
-        const newDate = new Date(date)
-        return `${newDate.toLocaleString('en-US', { month: 'short' })} ${newDate.getDate()}`
-    }
+    // const dateConverter = (date) => {
+    //     const newDate = new Date(date)
+    //     return `${newDate.toLocaleString('en-US', { month: 'short' })} ${newDate.getDate()}`
+    // }
 
     return (
         <div className="comment-container">

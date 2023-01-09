@@ -6,45 +6,45 @@ def seed_users():
 
     users = [
         {
-            'username': 'user1',
+            'username': 'Demo Channel',
             "email": 'user1@aa.io',
-            "first_name": 'user1_firstname',
-            "last_name": 'user1_lastname',
+            "first_name": 'Demo',
+            "last_name": 'Lee',
             "password": 'password'
         },
         {
-            "username": 'user2',
+            "username": 'Joe Channel',
             "email": 'user2@aa.io',
-            "first_name": 'user2_firstname',
-            "last_name": 'user2_lastname',
+            "first_name": 'Joe',
+            "last_name": 'Doe',
             "password": 'password'
         },
         {
-            "username": 'user3',
+            "username": 'Jane Channel',
             "email": 'user3@aa.io',
-            "first_name": 'user3_firstname',
-            "last_name": 'user3_lastname',
+            "first_name": 'Jane',
+            "last_name": 'Doe',
             "password": 'password'
         },
         {
-            "username": 'user4',
+            "username": 'David Channel',
             "email": 'user4@aa.io',
-            "first_name": 'user4_firstname',
-            "last_name": 'user5_lastname',
+            "first_name": 'David',
+            "last_name": 'Doe',
             "password": 'password'
         },
         {
-            "username": 'user5',
+            "username": 'Andrew Channel',
             "email": 'user5@aa.io',
-            "first_name": 'user5_firstname',
-            "last_name": 'user5_lastname',
+            "first_name": 'Andrew',
+            "last_name": 'Doe',
             "password": 'password'
         },
         {
-            "username": 'user6',
+            "username": 'Jeff Channel',
             "email": 'user6@aa.io',
-            "first_name": 'user6_firstname',
-            "last_name": 'user6_lastname',
+            "first_name": 'Jeff',
+            "last_name": 'Doe',
             "password": 'password'
         },
     ]

@@ -2,7 +2,8 @@ import { NavLink } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Modal } from "../../context/Modal"
-import { getUserVideos } from "../../store/videos"
+import { getUserVideos, getUserSubscribedVideos } from "../../store/videos"
+import { dateConverter, viewsConverter } from "../../store/helper"
 import SideBar from "../Sidebar/SideBar"
 import NavBar from "../Navigation/NavBar"
 import EditVideo from "../EditVideo"
@@ -22,6 +23,7 @@ const ProfilePage = () => {
     const [editting, setEditting] = useState(false)
     const [deleting, setDeleting] = useState(false)
     const [creating, setCreating] = useState(false)
+    const [home, setHome] = useState(true)
     const [videoFocus, setVideoFocus] = useState('')
 
     useEffect(() => {
@@ -47,22 +49,34 @@ const ProfilePage = () => {
         setCreating(true)
     }
 
+    const handleProfileHomeClick = (e) => {
+        e.preventDefault()
+        dispatch(getUserVideos(user.id))
+        setHome(true)
+    }
+
+    const handleProfileChannelClick = (e) => {
+        e.preventDefault()
+        dispatch(getUserSubscribedVideos(user.id))
+        setHome(false)
+    }
+
     return (
         <div className="profile-page-main">
             <NavBar />
             <SideBar />
             <div className="profile-page-top">
-                <div>icon goes here</div>
+                <div></div>
                 <div className="profile-page-userinfo">
                     <div>{user.firstName} {user.lastName}</div>
                     <div>{`@${user.username}`}</div>
                     <div>{user.subscribers} subscribers</div>
-                    <button onClick={handleVideoUploadClick}>Upload Videos</button>
+                    <button className="upload-videos" onClick={handleVideoUploadClick}>Upload Videos</button>
                 </div>
             </div>
             <div className="profile-page-options">
-                <span>Home</span>
-                <span>Channels</span>
+                <span onClick={handleProfileHomeClick}>Home</span>
+                <span onClick={handleProfileChannelClick}>Channels</span>
             </div>
             <div className="my-video-container">
                 {videos.map(video => (
@@ -76,16 +90,23 @@ const ProfilePage = () => {
                                     <div className="my-video-card-info">
                                         <div className="my-video-card-info-left">
                                             <p>{video.title}</p>
-                                            <span>{video.totalViews} views</span>
-                                            <span>{video.createdAt}</span>
+                                            <span>{viewsConverter(video.totalViews)}</span>
+                                            <span>{dateConverter(video.createdAt)}</span>
                                         </div>
                                     </div>
                                 </div>
                             </NavLink>
                         </div>
                         <div className="my-video-card-bottom">
-                            <button value={video.id} onClick={handleVideoEditClick}>Edit</button>
-                            <button value={video.id} onClick={handleVideoDeleteClick}>Delete</button>
+                        {
+                            home ?
+                            <div>
+                                <button value={video.id} onClick={handleVideoEditClick}>Edit</button>
+                                <button value={video.id} onClick={handleVideoDeleteClick}>Delete</button>
+                            </div>
+                            :
+                            null
+                        }
                         </div>
                         {
                             editting && +videoFocus === +video.id &&

@@ -35,10 +35,10 @@ const CreateVideo = ({setCreating}) => {
     }
 
     useEffect(() => {
-        if (title.length >= 255) setTitleError("255/255 max character limit reached")
+        if (title.length > 255) setTitleError("255/255 max character limit reached")
         if (title.length > 0 && title.length < 255) setTitleError('')
         if (title.length <= 0) setTitleError("Title is required")
-        if (description.length >= 255) setDescriptionError("255/255 max character limit reached")
+        if (description.length > 255) setDescriptionError("255/255 max character limit reached")
         if (description.length > 0 && description.length < 255) setDescriptionError('')
         if (description.length <= 0) setDescriptionError("Description is required")
         if (video == null) setVideoError("Video is required")
