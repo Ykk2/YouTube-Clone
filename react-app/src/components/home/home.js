@@ -1,17 +1,20 @@
-import { useEffect } from "react"
+import { useEffect, useSelector } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getVideos } from "../../store/videos"
 import SideBar from '../Sidebar/SideBar';
 import NavBar from "../Navigation/NavBar";
-import { NavLink } from "react-router-dom";
-import { dateConverter, viewsConverter } from "../../store/helper";
+import VideoCard from "./videoCard";
+import VideoPreview from "./videoPreview";
 import './home.css'
 
 
 const HomePage = () => {
 
     const dispatch = useDispatch()
+
     const videos = useSelector(state => Object.values(state.videos.videos))
+
+    const [focused, setFocused] = (false)
 
     useEffect(() => {
         dispatch(getVideos())
@@ -24,26 +27,10 @@ const HomePage = () => {
             <SideBar />
             <div className="main-page">
                 {videos.map(video => (
-                    <NavLink to={`/videos/${video.id}`}>
-                        <div className="video-card" key={video.id}>
-                            <video
-                                onMouseOver={event => event.target.play()}
-                                onMouseOut={event => event.target.pause()}
-                            >
-                                <source src={video.videoUrl} type="video/mp4" />
-                            </video>
-                            <div className="video-card-info">
-                                <div id="video-card-info-left">
-
-                                </div>
-                                <div id="video-card-info-right">
-                                    <p>{video.title}</p>
-                                    <p>{video.user.username}</p>
-                                    <span>{viewsConverter(video.totalViews)} {dateConverter(video.createdAt)}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </NavLink>
+                    focused ?
+                    <VideoPreview setFocused={setFocused} video={video}/>
+                    :
+                    <VideoCard setFocused={setFocused} video={video}/>
                 ))}
             </div>
         </div>
