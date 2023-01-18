@@ -249,9 +249,9 @@ const VideoDetails = () => {
                                         onMouseOver={event => event.target.play()}
                                         onMouseOut={event => event.target.pause()} />
                                     <div className="recommended-videos-info">
-                                        <div>title</div>
-                                        <div>channel</div>
-                                        <span>views createdAt</span>
+                                         <p>{video.title}</p>
+                                         <p>{video.user.username}</p>
+                                         <span>{viewsConverter(video.totalViews)} &#x2022; {dateConverter(video.createdAt)}</span>
                                     </div>
                                 </div>
                             </NavLink>

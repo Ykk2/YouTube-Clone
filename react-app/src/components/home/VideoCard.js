@@ -1,8 +1,5 @@
-import { Fragment, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getVideos } from "../../store/videos"
-import SideBar from '../Sidebar/SideBar';
-import NavBar from "../Navigation/NavBar";
+import { useState, useRef, useEffect } from "react"
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { dateConverter, viewsConverter } from "../../store/helper";
 import './home.css'
@@ -10,50 +7,84 @@ import './home.css'
 
 const VideoCard = ({video}) => {
 
+
+    const vidRef = useRef(null)
+
     const [timerId, setTimerId] = useState()
     const [focus, setFocus] = useState(false)
-    const [show, setShow] = useState(false)
+    const [hovering, setHovering] = useState(false)
+    const [duration, setDuration] = useState(null)
+    const [ready, setReady] = useState(false)
+
+    const [mins, setMins] = useState('NaN')
+    const [sec, setSec] = useState('NaN')
+
+    const minutes = parseInt(vidRef?.current?.duration / 60, 10)
+    const seconds = Math.trunc(vidRef?.current?.duration % 60)
+    // console.log(vidRef)
+
+    while (vidRef == null) {
+        const minutes = parseInt(vidRef?.current?.duration / 60, 10)
+        const seconds = Math.trunc(vidRef?.current?.duration % 60)
+        setMins(minutes)
+        setSec(seconds)
+        console.log()
+    }
+
+    // useEffect(() => {
+    //     while (!vidRef) {
+    //         const minutes = parseInt(vidRef?.current?.duration / 60, 10)
+    //         const seconds = Math.trunc(vidRef?.current?.duration % 60)
+    //         setMins(minutes)
+    //         setSec(seconds)
+    //     }
+    // }, [mins, sec, vidRef])
 
     const controlPreview = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        const timer = setTimeout(() => { setShow(true)
+
+        setHovering(true)
+
+        const timer = setTimeout(() => {
                                          e.target.play()
                                          setFocus(true)
-
+                                         setHovering(false)
+                                         vidRef?.current?.setAttribute("controls", true)
                                           }, 2000)
+
         setTimerId(timer)
     }
 
-    const cancelPreview = (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        // const ele = document.getElementById(`video${video.id}`)
-        // ele?.setAttribute("style", "")
-        e.target.pause()
+    const mouseOut = (e) => {
+        vidRef?.current.pause()
+        vidRef?.current.removeAttribute("controls")
         clearTimeout(timerId)
         setTimerId(false)
         setFocus(false)
-        setShow(false)
+        setHovering(false)
     }
 
-    // const setPosition = () => {
-    //     const ele = document.getElementById(`video${video.id}`)
-    //     const elepos = ele?.getBoundingClientRect()
-    //     ele.style.position = 'absolute'
-    //     ele.style.left = `${elepos.x}px`
-    //     ele.style.top = `${elepos.y}px`
-    // }
 
-    return (
-            <NavLink id={`video${video.id}`} to={`/videos/${video.id}`}>
-                <div className={ focus ? "video-card-preview" : "video-card"} key={video.id}>
+    return  (
+            <NavLink id={`video${video.id}`} to={`/videos/${video.id}`} onClick={mouseOut}>
+                <div className={ focus ? "video-card-preview" : "video-card"} onMouseLeave={mouseOut} key={video.id}>
                     <video
+                        poster={video.previewImage}
+                        ref={vidRef}
                         onMouseOver={event => controlPreview(event)}
-                        onMouseOut={event => cancelPreview(event) }
                     >
                         <source src={video.videoUrl} type="video/mp4" />
                     </video>
+                    {
+                        hovering ?
+                        <span id="preview-hover-text">Keep hovering to play</span>
+                        :
+                        ready ?
+                        <span id="preview-hover-text">{minutes}:{seconds}</span>
+                        :
+                        null
+                    }
                     <div className="video-card-info">
                         <div id="video-card-info-left">
 

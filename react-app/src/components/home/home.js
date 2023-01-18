@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { getVideos } from "../../store/videos"
 import SideBar from '../Sidebar/SideBar';
 import NavBar from "../Navigation/NavBar";
-import { NavLink } from "react-router-dom";
-import { dateConverter, viewsConverter } from "../../store/helper";
 import VideoCard from "./VideoCard";
 import './home.css'
 
