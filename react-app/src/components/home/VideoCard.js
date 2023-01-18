@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react"
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { dateConverter, viewsConverter } from "../../store/helper";
 import './home.css'
@@ -13,23 +12,23 @@ const VideoCard = ({video}) => {
     const [timerId, setTimerId] = useState()
     const [focus, setFocus] = useState(false)
     const [hovering, setHovering] = useState(false)
-    const [duration, setDuration] = useState(null)
+    // const [duration, setDuration] = useState(null)
     const [ready, setReady] = useState(false)
 
-    const [mins, setMins] = useState('NaN')
-    const [sec, setSec] = useState('NaN')
+    // const [mins, setMins] = useState('NaN')
+    // const [sec, setSec] = useState('NaN')
 
-    const minutes = parseInt(vidRef?.current?.duration / 60, 10)
-    const seconds = Math.trunc(vidRef?.current?.duration % 60)
+    // const minutes = parseInt(vidRef?.current?.duration / 60, 10)
+    // const seconds = Math.trunc(vidRef?.current?.duration % 60)
     // console.log(vidRef)
 
-    while (vidRef == null) {
-        const minutes = parseInt(vidRef?.current?.duration / 60, 10)
-        const seconds = Math.trunc(vidRef?.current?.duration % 60)
-        setMins(minutes)
-        setSec(seconds)
-        console.log()
-    }
+    // while (vidRef == null) {
+    //     const minutes = parseInt(vidRef?.current?.duration / 60, 10)
+    //     const seconds = Math.trunc(vidRef?.current?.duration % 60)
+    //     setMins(minutes)
+    //     setSec(seconds)
+    //     console.log()
+    // }
 
     // useEffect(() => {
     //     while (!vidRef) {
@@ -70,7 +69,7 @@ const VideoCard = ({video}) => {
             <NavLink id={`video${video.id}`} to={`/videos/${video.id}`} onClick={mouseOut}>
                 <div className={ focus ? "video-card-preview" : "video-card"} onMouseLeave={mouseOut} key={video.id}>
                     <video
-                        poster={video.previewImage}
+                        // poster={video.previewImage}
                         ref={vidRef}
                         onMouseOver={event => controlPreview(event)}
                     >
@@ -81,7 +80,8 @@ const VideoCard = ({video}) => {
                         <span id="preview-hover-text">Keep hovering to play</span>
                         :
                         ready ?
-                        <span id="preview-hover-text">{minutes}:{seconds}</span>
+                        // <span id="preview-hover-text">{minutes}:{seconds}</span>
+                        null
                         :
                         null
                     }
