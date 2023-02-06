@@ -48,9 +48,8 @@ YouTube clone that attempts to imitate the functionalities of the original site.
 
 ## Wiki Links:
 
-### [Features List](https://github.com/Ykk2/medium-clone/wiki/Features-List)
-### [API Documentation](https://github.com/Ykk2/medium-clone/wiki/API-Documentation)
-### [DB Schema](https://github.com/Ykk2/medium-clone/wiki/Schema-Table)
+### [Features List](https://github.com/Ykk2/YouTube-Clone/wiki/Features-List)
+### [DB Schema](https://github.com/Ykk2/YouTube-Clone/wiki/Schema-Table)
 	
 ## Getting started
 
@@ -88,9 +87,9 @@ YouTube clone that attempts to imitate the functionalities of the original site.
 
 
 Please feel free to reach out to me at below for any comments. <br><br> 
-<code>
+
 <a href="www.linkedin.com/in/richardkwon2">
 <img height="50" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="CSS" title="CSS" />Richard Kwon
 </a>
-</code>
+
 
