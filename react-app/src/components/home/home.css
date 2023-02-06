@@ -1,7 +1,8 @@
+
 .main-page {
     position: relative;
-    left: 8%;
-    top: 100px;
+    left: 10%;
+    top: 10vh;
     width: 80%;
     height: 100vh;
     padding-left: 3%;
@@ -12,6 +13,7 @@
     grid-column-gap: 1%;
     grid-row-gap: 5%;
     font-size: 0.8vw;
+    padding-bottom: 15%;
 }
 
 .main-page > a {

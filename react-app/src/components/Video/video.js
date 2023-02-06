@@ -244,7 +244,8 @@ const VideoDetails = () => {
                         if (video.id !== +videoId) {
                             return <NavLink key={video.id} to={`/videos/${video.id}`}>
                                 <div  className="recommended-videos-card">
-                                    <video src={video?.videoUrl}
+                                    <video src={`${video.videoUrl}#t=1`}
+                                        preload="metadata"
                                         muted
                                         onMouseOver={event => event.target.play()}
                                         onMouseOut={event => event.target.pause()} />

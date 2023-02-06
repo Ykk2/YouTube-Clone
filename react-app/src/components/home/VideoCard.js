@@ -70,10 +70,12 @@ const VideoCard = ({video}) => {
                 <div className={ focus ? "video-card-preview" : "video-card"} onMouseLeave={mouseOut} key={video.id}>
                     <video
                         // poster={video.previewImage}
+                        preload="metadata"
+                        muted={true}
                         ref={vidRef}
                         onMouseOver={event => controlPreview(event)}
                     >
-                        <source src={video.videoUrl} type="video/mp4" />
+                        <source src={`${video.videoUrl}#t=1`} type="video/mp4" />
                     </video>
                     {
                         hovering ?

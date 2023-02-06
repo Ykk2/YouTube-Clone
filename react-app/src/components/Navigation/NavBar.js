@@ -48,7 +48,7 @@ const NavBar = () => {
             <div className="NavBar-right">
                 { user ?
                 <div>
-                    <i onClick={handleShowMenuClick} className="fa-regular fa-circle" />
+                    <i onClick={handleShowMenuClick} className="fa-regular fa-user" />
                 </div>
                 :
                 <NavLink to="/login">

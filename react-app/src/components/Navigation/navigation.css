@@ -11,6 +11,10 @@
     z-index: 99;
 }
 
+.NavBar-right > div:nth-child(1) {
+    cursor: pointer;
+}
+
 .NavBar-left {
     width: auto;
     height: 100%;
