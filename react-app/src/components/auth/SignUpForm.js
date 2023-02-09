@@ -23,7 +23,7 @@ const SignUpForm = () => {
   const [firstNameError, setFirstNameError] = useState('')
   const [lastNameError, setLastNameError] = useState('')
   const [usernameError, setUserNameError] = useState('')
-  const [emailError, setEmailError ] = useState('')
+  const [emailError, setEmailError] = useState('')
   const [passwordError, setPassWordError] = useState('')
   const [repeatPasswordError, setRepeatPasswordError] = useState('')
 
@@ -51,8 +51,8 @@ const SignUpForm = () => {
   }, [email])
 
   useEffect(() => {
-    if (password.length <= 0 || !password.trim()) setPassWordError("password is required")
-    if (password.length < 8) setPassWordError("need minimum 8 characters")
+    if (password.length <= 0 || !password.trim()) setPassWordError("Password is required")
+    if (password.length < 8) setPassWordError("Need minimum 8 characters")
 
     else setPassWordError("")
 
@@ -113,117 +113,123 @@ const SignUpForm = () => {
   }
 
   return (
-    <form className="signup-form" onSubmit={onSignUp}>
-      <div>
-
-      </div>
-      <div className="signup-form-left">
+    <div className="sign-up-form-background">
+      <form className="signup-form" onSubmit={onSignUp}>
         <div>
 
         </div>
-        <div className="signup-form-left-top">
-          <div>Google</div>
-          <div>Create your account</div>
-          <div>to continue to uTube</div>
-        </div>
-        <div className='signup-first-last'>
+        <div className="signup-form-left">
           <div>
-            <label>First Name</label>
+
+          </div>
+          <div className="signup-form-left-top">
+            <div><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+            <div>Create your account</div>
+            <div>to continue to uTube</div>
+          </div>
+          <div className='signup-first-last'>
+            <div>
+              <label>First Name</label>
+              <input
+                className="firstName"
+                type='text'
+                name='firstName'
+                onChange={updateFirstName}
+                value={firstName}
+              ></input>
+              {
+                showError ?
+                  <div className="signup-errors">{firstNameError}</div>
+                  :
+                  null
+              }
+            </div>
+            <div>
+              <label>Last Name</label>
+              <input
+                className="lastName"
+                type='text'
+                name='lastName'
+                onChange={updateLastName}
+                value={lastName}
+              ></input>
+              {
+                showError ?
+                  <div className="signup-errors">{lastNameError}</div>
+                  :
+                  null
+              }
+            </div>
+          </div>
+          <div className="signup-username">
+            <label>Username</label>
             <input
               type='text'
-              name='firstName'
-              onChange={updateFirstName}
-              value={firstName}
+              name='username'
+              onChange={updateUsername}
+              value={username}
             ></input>
             {
               showError ?
-                <div>{firstNameError}</div>
+                <div className="signup-errors">{usernameError}</div>
                 :
                 null
             }
           </div>
-          <div>
-            <label>Last Name</label>
+          <div className="signup-email">
+            <label>Email</label>
             <input
               type='text'
-              name='lastName'
-              onChange={updateLastName}
-              value={lastName}
+              name='email'
+              onChange={updateEmail}
+              value={email}
             ></input>
-                        {
+            {
               showError ?
-                <div>{lastNameError}</div>
+                <div className="signup-errors">{emailError}</div>
                 :
                 null
             }
           </div>
-        </div>
-        <div className="signup-username">
-          <label>Username</label>
-          <input
-            type='text'
-            name='username'
-            onChange={updateUsername}
-            value={username}
-          ></input>
-                      {
-              showError ?
-                <div>{usernameError}</div>
-                :
-                null
-            }
-        </div>
-        <div className="signup-email">
-          <label>Email</label>
-          <input
-            type='text'
-            name='email'
-            onChange={updateEmail}
-            value={email}
-          ></input>
-            {
-              showError ?
-                <div>{emailError}</div>
-                :
-                null
-            }
-        </div>
-        <div className="signup-form-password-confirm">
-          <div>
-            <label>Password</label>
-            <input
-              type='password'
-              name='password'
-              onChange={updatePassword}
-              value={password}
-            ></input>
-            {
-              showError ?
-                <div>{passwordError}</div>
-                :
-                null
-            }
+          <div className="signup-form-password-confirm">
+            <div>
+              <label>Password</label>
+              <input
+                className="password"
+                type='password'
+                name='password'
+                onChange={updatePassword}
+                value={password}
+              ></input>
+              {
+                showError ?
+                  <div className="signup-errors">{passwordError}</div>
+                  :
+                  null
+              }
+            </div>
+            <div>
+              <label>Repeat Password</label>
+              <input
+                className="repeat-password"
+                type='password'
+                name='repeat_password'
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                required={true}
+              ></input>
+              {
+                showError ?
+                  <div className="signup-errors">{repeatPasswordError}</div>
+                  :
+                  null
+              }
+            </div>
           </div>
-          <div>
-            <label>Repeat Password</label>
-            <input
-              type='password'
-              name='repeat_password'
-              onChange={updateRepeatPassword}
-              value={repeatPassword}
-              required={true}
-            ></input>
-            {
-              showError ?
-                <div>{repeatPasswordError}</div>
-                :
-                null
-            }
-          </div>
+          <button type='submit'>Sign Up</button>
         </div>
-        <button type='submit'>Sign Up</button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

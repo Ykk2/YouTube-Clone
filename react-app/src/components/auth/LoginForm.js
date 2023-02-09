@@ -74,54 +74,58 @@ const LoginForm = () => {
   }
 
   return (
-    <form className="login-form" onSubmit={onLogin}>
-      <div>
+    <div className="login-form-background">
+      <form className="login-form" onSubmit={onLogin}>
+        <div>
 
-      </div>
-      <div className="login-form-top">
-        <div>Google</div>
-        <div>Sign in</div>
-        <div>to continue to uTube</div>
-      </div>
-      <div className="email-field-login">
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          value={email}
-          onChange={updateEmail}
-        />
-          {
-            showError ?
-              <div>{emailError}</div>
-              :
-              null
-          }
-      </div>
-      <div className="password-field-login">
-          <label htmlFor='password'>Password</label>
+        </div>
+        <div className="login-form-top">
+          <div>
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+          </div>
+          <div>Sign in</div>
+          <div>to continue to uTube</div>
+        </div>
+        <div className="email-field-login">
+          <label htmlFor='email'>Email</label>
           <input
-            name='password'
-            type='password'
-            value={password}
-            onChange={updatePassword}
+            name='email'
+            type='text'
+            value={email}
+            onChange={updateEmail}
           />
-          {
-            showError ?
-              <div>{passwordError}</div>
-              :
-              null
-          }
-      </div>
-      <div>
-        Don't have an account? Log in as a
-        <div className="login-links" onClick={demoSignIn}>Demo User</div>
-      </div>
-      <div>
-        <span className="login-links" onClick={signUp}>Create Account</span>
-        <button className="login-links" type='submit'>Sign in</button>
-      </div>
-    </form>
+            {
+              showError ?
+                <div>{emailError}</div>
+                :
+                null
+            }
+        </div>
+        <div className="password-field-login">
+            <label htmlFor='password'>Password</label>
+            <input
+              name='password'
+              type='password'
+              value={password}
+              onChange={updatePassword}
+            />
+            {
+              showError ?
+                <div>{passwordError}</div>
+                :
+                null
+            }
+        </div>
+        <div className="demo-user-login-text">
+          Don't have an account? Log in as a
+          <div className="login-demo" onClick={demoSignIn}>Demo User</div>
+        </div>
+        <div className="login-links-container">
+          <span className="login-links" onClick={signUp}>Create Account</span>
+          <button className="login-links" type='submit'>Sign in</button>
+        </div>
+      </form>
+    </div>
   );
 };
 
