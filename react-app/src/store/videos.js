@@ -152,7 +152,7 @@ export const getUserVideos = (userId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data) {
-      console.log(data)
+
       dispatch(loadVideos(data))
       return null
     }
@@ -257,7 +257,7 @@ export const getUserSubscribedVideos = (userId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data) {
-      console.log(data)
+
       dispatch(loadVideos(data))
       return null
     }

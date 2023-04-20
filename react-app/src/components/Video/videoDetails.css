@@ -57,6 +57,12 @@
     height: 37vw;
 }
 
+.bananas {
+    width: 100%;
+    height: 37vw;
+    position: absolute;
+}
+
 .recommended-videos-card {
     display: flex;
     flex-direction: row;

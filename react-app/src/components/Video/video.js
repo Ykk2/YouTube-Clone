@@ -9,6 +9,9 @@ import NavBar from "../Navigation/NavBar";
 import CommentCard from "./CommentCard";
 import './videoDetails.css'
 
+import { FastAverageColor } from 'fast-average-color';
+
+
 
 const VideoDetails = () => {
     const history = useHistory()
@@ -81,9 +84,9 @@ const VideoDetails = () => {
     const handleCommentSubmit = (e) => {
         e.preventDefault()
         if (!user) {
-           return history.push('/login')
+            return history.push('/login')
         }
-        dispatch(postComment({comment}, videoId))
+        dispatch(postComment({ comment }, videoId))
         setFocused(false)
         setComment("")
     }
@@ -139,13 +142,31 @@ const VideoDetails = () => {
         textArea.style.height = "10px"
     }
 
+
+
+    const fac = new FastAverageColor();
+
+    // console.log(document.querySelector('video.apples').width)
+
+    fac.getColorAsync(document.querySelector('video.apples'))
+        .then(color => {
+            const background = document.querySelector('.bananas')
+            background.style.backgroundColor = color.rgba;
+            background.style.color = color.isDark ? '#fff' : '#000';
+        })
+        .catch(e => {
+            console.log(e);
+        });
+
+
     return (
         <>
             <NavBar />
             <div className="video-details">
                 <div className="main-content">
                     <div className="main-video">
-                        <video src={video?.videoUrl} controls autoPlay />
+                        <video  className="apples" src={video?.videoUrl} controls autoPlay />
+                        <canvas className="bananas"></canvas>
                     </div>
                     <div className="video-info">
                         <div id="video-title">
@@ -163,28 +184,28 @@ const VideoDetails = () => {
                                     </div>
                                 </div>
                                 {
-                                subscribed ?
+                                    subscribed ?
 
-                                    <button onClick={handleShowUnsubscribe} className="subscribed-button">
-                                        <i className="fa-regular fa-bell"></i>
+                                        <button onClick={handleShowUnsubscribe} className="subscribed-button">
+                                            <i className="fa-regular fa-bell"></i>
                                             Subscribed
-                                        <i className="fa-solid fa-chevron-down"></i>
-                                        {
-                                        showUnsubscribe ?
-                                        <div className="notification-menu">
-                                            <div onClick={handleUnsubscribeClick} className="unsubscribe">
-                                                <i className="fa-solid fa-user-minus fa-flip-horizontal"></i>
-                                                <span>unsubscribe</span>
-                                            </div>
-                                        </div>
+                                            <i className="fa-solid fa-chevron-down"></i>
+                                            {
+                                                showUnsubscribe ?
+                                                    <div className="notification-menu">
+                                                        <div onClick={handleUnsubscribeClick} className="unsubscribe">
+                                                            <i className="fa-solid fa-user-minus fa-flip-horizontal"></i>
+                                                            <span>unsubscribe</span>
+                                                        </div>
+                                                    </div>
+                                                    :
+                                                    null
+                                            }
+                                        </button>
                                         :
-                                        null
-                                        }
-                                    </button>
-                                    :
-                                    <button onClick={handleSubscribeClick} className="subscribe-button">
-                                        Subscribe
-                                    </button>
+                                        <button onClick={handleSubscribeClick} className="subscribe-button">
+                                            Subscribe
+                                        </button>
                                 }
                             </div>
                             <div id="channel-info-right">
@@ -219,10 +240,10 @@ const VideoDetails = () => {
                                 onFocus={showOptions}
                                 placeholder="Add a comment..."
                                 maxLength='1000'
-                                >
+                            >
                             </textarea>
-                                <div className="comment-length-counter">{`${comment?.length}/1000`}</div>
-                            { focused ?
+                            <div className="comment-length-counter">{`${comment?.length}/1000`}</div>
+                            {focused ?
                                 <span>
                                     <button onClick={hideOptions}>Cancel</button>
                                     <button className={`${commentSubmit}`} onClick={handleCommentSubmit}>Comment</button>
@@ -234,7 +255,7 @@ const VideoDetails = () => {
                     </div>
                     <div className="video-comments">
                         {comments.reverse().map(comment => (
-                            <CommentCard key={comment.id} comment={comment}/>
+                            <CommentCard key={comment.id} comment={comment} />
                         ))}
                     </div>
                 </div>
@@ -243,16 +264,16 @@ const VideoDetails = () => {
                     {videos.map(video => {
                         if (video.id !== +videoId) {
                             return <NavLink key={video.id} to={`/videos/${video.id}`}>
-                                <div  className="recommended-videos-card">
+                                <div className="recommended-videos-card">
                                     <video src={`${video.videoUrl}#t=1`}
                                         preload="metadata"
                                         muted
                                         onMouseOver={event => event.target.play()}
                                         onMouseOut={event => event.target.pause()} />
                                     <div className="recommended-videos-info">
-                                         <p>{video.title}</p>
-                                         <p>{video.user.username}</p>
-                                         <span>{viewsConverter(video.totalViews)} &#x2022; {dateConverter(video.createdAt)}</span>
+                                        <p>{video.title}</p>
+                                        <p>{video.user.username}</p>
+                                        <span>{viewsConverter(video.totalViews)} &#x2022; {dateConverter(video.createdAt)}</span>
                                     </div>
                                 </div>
                             </NavLink>
