@@ -69,13 +69,8 @@ YouTube clone that attempts to imitate the functionalities of the original site.
       npm install
       ```
 
-4. Type below command at the root directory.
 
-      ```bash
-      pipenv run flask run
-      ```
-
-5. After the backend server starts, run the following command at the react-app-directory.
+4. After the backend server starts, run the following command at the react-app-directory.
 
       ```bash
       npm start
