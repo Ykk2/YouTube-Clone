@@ -111,13 +111,6 @@
 }
 
 
-a {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    margin: auto;
-}
-
 .video-card-preview > video {
     object-fit: cover;
     height: 70%;

@@ -26,8 +26,11 @@
 
 * {
     font-family: Roboto-Regular;
-    background-color: rgb(15, 15, 15);
     color: white;
+}
+
+html {
+    background-color: rgb(27, 27, 27);
 }
 
 *::-webkit-scrollbar {
@@ -43,6 +46,7 @@
 a {
     color: rgb(225, 225, 225);
     text-decoration: none;
+    cursor: pointer;
 }
 
 input:focus {
