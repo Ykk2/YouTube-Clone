@@ -31,8 +31,7 @@ YouTube clone that attempts to imitate the functionalities of the original site.
 <code><img height="35" src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" alt="JavaScript" title="JavaScript" /></code>
 <code><img height="35" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React" />	  </code>
 <code><img height="35" src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png" alt="Redux" title="Redux" /></code>
-<code><img height="25" src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python" title="Python" />
-</code>
+<code><img height="25" src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python" title="Python" /></code>
 <code><img height="25" src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white" alt="Flask" title="Flask" /></code>
 <code><img height="25" src="https://quintagroup.com/cms/python/images/sqlalchemy-logo.png/@@images/image.png" alt="CSS" title="SQLAlchemy" /></code>
 <code><img height="25" src="https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white" alt="CSS" title="CSS" /></code>
@@ -82,13 +81,11 @@ YouTube clone that attempts to imitate the functionalities of the original site.
       npm start
       ```
 
-6. Hopefully your browser loads the project.....
 
 
 Please feel free to reach out to me at below for any comments. <br><br> 
 
-<a href="www.linkedin.com/in/richardkwon2">
-<img height="50" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="CSS" title="CSS" />Richard Kwon
+<a href="www.linkedin.com/in/richardkwon2"><img height="50" src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="CSS" title="CSS" />Richard Kwon
 </a>
 
 
