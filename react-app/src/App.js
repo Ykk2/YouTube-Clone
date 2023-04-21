@@ -9,6 +9,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import VideoDetails from './components/Video/video';
 import ProfilePage from './components/ProfilePage/ProfilePage';
+import NavBar from './components/Navigation/NavBar';
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -29,6 +30,7 @@ function App() {
   return (
     <ModalProvider >
       <BrowserRouter>
+        <NavBar />
         <Switch>
           {/* <Route path='/login' exact={true}>
             <LoginForm />
@@ -55,7 +57,7 @@ function App() {
             <ProfilePage />
           </Route>
           <Route>
-            <SignUpForm path='/signup' exact={true}/>
+            <SignUpForm path='/signup' exact={true} />
           </Route>
         </Switch>
       </BrowserRouter>

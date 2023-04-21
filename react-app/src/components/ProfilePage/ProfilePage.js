@@ -63,8 +63,6 @@ const ProfilePage = () => {
 
     return (
         <div className="profile-page-main">
-            <NavBar />
-            <SideBar />
             <div className="profile-page-top">
                 <div></div>
                 <div className="profile-page-userinfo">

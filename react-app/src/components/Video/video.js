@@ -161,7 +161,6 @@ const VideoDetails = () => {
 
     return (
         <>
-            <NavBar />
             <div className="video-details">
                 <div className="main-content">
                     <div className="main-video">
@@ -180,7 +179,7 @@ const VideoDetails = () => {
                                     </div>
                                     <div>
                                         <div>{video?.user?.username}</div>
-                                        <div>{video?.user?.subscribers} {+video?.user?.subscribers <= 1 ? "subscriber" : "subscribers"}</div>
+                                        <div>{video?.user?.subscribers} {+video?.user?.subscribers == 1 ? "subscriber" : "subscribers"}</div>
                                     </div>
                                 </div>
                                 {

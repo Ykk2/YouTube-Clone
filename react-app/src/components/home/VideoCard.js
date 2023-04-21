@@ -4,7 +4,7 @@ import { dateConverter, viewsConverter } from "../../store/helper";
 import './home.css'
 
 
-const VideoCard = ({video}) => {
+const VideoCard = ({ video }) => {
 
 
     const vidRef = useRef(null)
@@ -46,11 +46,11 @@ const VideoCard = ({video}) => {
         setHovering(true)
 
         const timer = setTimeout(() => {
-                                         e.target.play()
-                                         setFocus(true)
-                                         setHovering(false)
-                                         vidRef?.current?.setAttribute("controls", true)
-                                          }, 2000)
+            e.target.play()
+            setFocus(true)
+            setHovering(false)
+            vidRef?.current?.setAttribute("controls", true)
+        }, 2000)
 
         setTimerId(timer)
     }
@@ -65,40 +65,37 @@ const VideoCard = ({video}) => {
     }
 
 
-    return  (
-            <NavLink id={`video${video.id}`} to={`/videos/${video.id}`} onClick={mouseOut}>
-                <div className={ focus ? "video-card-preview" : "video-card"} onMouseLeave={mouseOut} key={video.id}>
-                    <video
-                        // poster={video.previewImage}
-                        preload="metadata"
-                        muted={true}
-                        ref={vidRef}
-                        onMouseOver={event => controlPreview(event)}
-                    >
-                        <source src={`${video.videoUrl}#t=1`} type="video/mp4" />
-                    </video>
-                    {
-                        hovering ?
+    return (
+        <NavLink id={`video${video.id}`} to={`/videos/${video.id}`} onClick={mouseOut}>
+            <div className="video-card" onMouseLeave={mouseOut} key={video.id}>
+                <video
+                    // poster={video.previewImage}
+                    preload="metadata"
+                    muted={true}
+                    ref={vidRef}
+                    onMouseOver={event => controlPreview(event)}
+                >
+                    <source src={`${video.videoUrl}#t=1`} type="video/mp4" />
+                </video>
+                {
+                    hovering ?
                         <span id="preview-hover-text">Keep hovering to play</span>
                         :
                         ready ?
-                        // <span id="preview-hover-text">{minutes}:{seconds}</span>
-                        null
-                        :
-                        null
-                    }
-                    <div className="video-card-info">
-                        <div id="video-card-info-left">
-
-                        </div>
-                        <div id="video-card-info-right">
-                            <p>{video.title}</p>
-                            <p>{video.user.username}</p>
-                            <span>{viewsConverter(video.totalViews)} {dateConverter(video.createdAt)}</span>
-                        </div>
+                            // <span id="preview-hover-text">{minutes}:{seconds}</span>
+                            null
+                            :
+                            null
+                }
+                <div className="video-card-info">
+                    <div id="video-card-info-right">
+                        <p>{video.title}</p>
+                        <p>{video.user.username}</p>
+                        <span>{viewsConverter(video.totalViews)} | {dateConverter(video.createdAt)}</span>
                     </div>
                 </div>
-            </NavLink>
+            </div>
+        </NavLink>
     )
 }
 
