@@ -51,32 +51,27 @@ YouTube clone that attempts to imitate the functionalities of the original site.
 	
 ## Getting started
 
-1. Clone this repository (only this branch)
+1. Clone this repository 
 
-2. Install backend dependencies by running the following commands at the root directory.
+2. Install backend dependencies and start backend by running the following commands at the root directory.
 
       ```bash
       pipenv install -r requirements.txt
       ```
-      
+  
       ```bash
       pipenv run flask run
       ```
 
-3. Install frontend dependencies by running the following commands at the 'react-app' directory.
+3. Install frontend dependencies and start frontend by running the following commands at the 'react-app' directory.
 
       ```bash
       npm install
       ```
-
-
-4. After the backend server starts, run the following command at the react-app-directory.
-
+      
       ```bash
       npm start
       ```
-
-
 
 Please feel free to reach out to me at below for any comments. <br><br> 
 
